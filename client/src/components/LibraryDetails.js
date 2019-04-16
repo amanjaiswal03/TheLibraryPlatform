@@ -40,9 +40,6 @@ class LibraryDetails extends Component{
                 <div className="library-details">
                     {this.displayLibraryDetails()}
                 </div>
-                <div className="book-details">
-                    <BookDetails bookId={ this.state.selected } />
-                </div>
             </div>
         )
     }
@@ -52,7 +49,7 @@ export default graphql(getLibraryQuery, {
     options: (props) => {
         return {
             variables: {
-                id: props.libraryId
+                id: props.match.params.id
             }
         }
     }

@@ -10,14 +10,14 @@ const BookType = new GraphQLObjectType({
     name: 'Book',
     fields: () => ({
         id: { type: GraphQLID },
-        authorId: { type: GraphQLID },
+        authorName: { type: GraphQLString },
         name: { type: GraphQLString },
         genre: { type: GraphQLString },
         librariesid: { type: new GraphQLList(GraphQLID) },
         author: {
             type: AuthorType,
             resolve(parent, args) {
-                return Author.findById(parent.authorId);
+                return Author.find({name: parent.authorName});
             }
         },
         library: {
@@ -87,6 +87,19 @@ const RootQuery = new GraphQLObjectType({
                 return Author.findById(args.id);
             }
         },
+        authorN: {
+            type: AuthorType,
+            args: {name: {type: GraphQLString}},
+            resolve(parents, args) {
+                // try{
+                //     return  Author.findOne({name: args.name});
+                // } catch(err){
+                //     return err;
+                // }
+                return Author.findOne({name: args.name});
+            }
+        
+        },
         libraries: {
             type: new GraphQLList(LibraryType),
             resolve(parents, args) {
@@ -140,7 +153,7 @@ const Mutation = new GraphQLObjectType({
             args: {
                 name: { type: new GraphQLNonNull(GraphQLString) },
                 genre: { type: GraphQLString },
-                authorId: { type: new GraphQLNonNull(GraphQLString) },
+                authorName: { type: new GraphQLNonNull(GraphQLString) },
                 librariesid: { type: new GraphQLList(GraphQLID) }
             },
             resolve(parent, args) {

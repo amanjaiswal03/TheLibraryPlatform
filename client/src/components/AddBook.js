@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import {graphql, compose } from 'react-apollo';
-import { addBookMutation, addAuthorMutation, getBooksQuery, getAuthorsQuery, getAuthorQuery } from '../queries/queries';
+import { addBookMutation, addAuthorMutation} from '../queries/queries';
+
 
 class AddBook extends Component {
     constructor(props){
         super(props);
+        
         this.state = {
             name: '',
             genre: '',
@@ -15,33 +17,33 @@ class AddBook extends Component {
         e.preventDefault();
         this.props.addAuthorMutation({
             variables: {
-                name: this.state.authorName
+                name: this.state.authorName,
             }
-        });
-        console.log(this.props.data);
+        })
+        //console.log(this.props);
         this.props.addBookMutation({
             variables: {
                 name: this.state.name,
                 genre: this.state.genre,
-                authorId: "123"
-            },
-            refetchQueries: [{ query: getBooksQuery }]
-        });
+                authorName: this.state.authorName
+            }
+        })
+
     }
     render(){
         return(
             <form id = "add-book" onSubmit = {this.submitForm.bind(this)}>
                 <div className="field">
                     <label>Book Name:</label>
-                    <input type = "text" onChange = {(e)=> {this.setState({name: e.target.value})}}></input>
+                    <input type = "text" onChange = {(e)=> {this.setState({name: e.target.value})}} required></input>
                 </div>
                 <div className="field">
                     <label>Genre:</label>
-                    <input type = "text" onChange = {(e)=> {this.setState({genre: e.target.value})}}></input>
+                    <input type = "text" onChange = {(e)=> {this.setState({genre: e.target.value})}} required></input>
                 </div>
                 <div className="field">
-                    <label>Author Name:</label>
-                    <input type = "text" onChange = {(e)=> {this.setState({authorName: e.target.value})}}></input>
+                        <label>Author Name:</label>
+                        <input type = "text" onChange = {(e)=> {this.setState({authorName: e.target.value})}} required></input>
                 </div>
                 <button> Add book </button>
             </form>
@@ -51,14 +53,6 @@ class AddBook extends Component {
 
 export default compose(
     graphql(addBookMutation, {name: "addBookMutation"}),
-    graphql(addAuthorMutation, {name: "addAuthorMutation"}),
-    graphql(getAuthorQuery, {
-        options: (props) => {
-            return {
-                variables: {
-                    id: props.Id
-                }
-            }
-        }
-    })
+    graphql(addAuthorMutation, {name: "addAuthorMutation"})
+    
 )(AddBook);

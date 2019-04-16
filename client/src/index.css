@@ -1,4 +1,48 @@
+/* entire content */
+
 body {
   background: #eee;
+  margin: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
+.link {
+  text-decoration: none;
+  color: white;
+}
+
+/* homepage decoration */
+.homepage {
+  height: 60vh;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.homepage .alllib {
+  margin-top: 20px;
+}
+/* navbar */
+
+div.navbar {
+  display: flex;
+  justify-content: space-around;
+}
+
+ul.right {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+}
+
+ul.right li {
+  padding: 20px;
+  text-decoration: none;
+  color: none;
+}
+
+Button.alllib {
+  background-color:#3F51B5 !important;
+  color: White;
+}
+

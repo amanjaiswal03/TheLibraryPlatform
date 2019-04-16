@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {graphql, compose } from 'react-apollo';
-import { addLibraryMutation, getBooksQuery, getLibrariesQuery} from '../queries/queries';
+import { addLibraryMutation,getLibrariesQuery} from '../queries/queries';
 
 class AddLibrary extends Component {
     constructor(props){
@@ -27,15 +27,15 @@ class AddLibrary extends Component {
             <form id = "add-library" onSubmit = {this.submitForm.bind(this)}>
                 <div className="field">
                     <label>Library Name:</label>
-                    <input type = "text" onChange = {(e)=> {this.setState({name: e.target.value})}}></input>
+                    <input type = "text" onChange = {(e)=> {this.setState({name: e.target.value})}} required></input>
                 </div>
                 <div className="field">
                     <label>Address:</label>
-                    <input type = "text" onChange = {(e)=> {this.setState({address: e.target.value})}}></input>
+                    <input type = "text" onChange = {(e)=> {this.setState({address: e.target.value})} } required></input>
                 </div>
                 <div className="field">
                     <label>MembershipFee:</label>
-                    <input type = "text" onChange = {(e)=> {this.setState({membershipFee: e.target.value})}}></input>
+                    <input type = "text" onChange = {(e)=> {this.setState({membershipFee: e.target.value})}} required></input>
                 </div>
                 <button> Create library </button>
             </form>

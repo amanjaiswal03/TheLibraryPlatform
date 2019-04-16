@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {getLibrariesQuery} from '../queries/queries';
 import { graphql } from 'react-apollo';
 
+import {Link} from 'react-router-dom';
 //components
 import LibraryDetails from './LibraryDetails';
 import AddBook from './AddBook';
@@ -20,7 +21,9 @@ class LibraryList extends Component{
         } else{
             return data.libraries.map(library => {
                 return(
-                    <li key = {library.id} onClick = {(e) => this.setState({selected: library.id})}>{library.name} <br></br> {library.address} </li>
+                    <Link to = {'/library/' + library.id} key={library.id}>
+                        <li key = {library.id} onClick = {(e) => this.setState({selected: library.id})}>{library.name} <br></br> {library.address} </li>
+                    </Link>
                 );
             })
         }
@@ -32,8 +35,6 @@ class LibraryList extends Component{
                 <ul id="libraries-list">
                     { this.displayLibraries() }
                 </ul>
-                <LibraryDetails libraryId={ this.state.selected } />
-                <AddBook />
             </div>
         )
     }
