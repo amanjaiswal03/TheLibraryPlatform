@@ -13,7 +13,7 @@ const BookType = new GraphQLObjectType({
         authorName: { type: GraphQLString },
         name: { type: GraphQLString },
         genre: { type: GraphQLString },
-        librariesid: { type: new GraphQLList(GraphQLID) },
+        librariesId: { type: new GraphQLList(GraphQLID) },
         author: {
             type: AuthorType,
             resolve(parent, args) {
@@ -49,11 +49,10 @@ const LibraryType = new GraphQLObjectType({
         id: { type: GraphQLID },
         name: { type: GraphQLString },
         address: { type: GraphQLString },
-        booksid: { type: new GraphQLList(GraphQLID) },
         books: {
             type: GraphQLList(BookType),
             resolve(parent, args) {
-                return Book.find({ _id: { $in: parent.booksid } });
+                return Book.find({ librariesId : parent.id });
             }
         },
         membershipFee: { type: GraphQLFloat },
@@ -129,7 +128,6 @@ const Mutation = new GraphQLObjectType({
             args: {
                 name: { type: new GraphQLNonNull(GraphQLString) },
                 address: { type: new GraphQLNonNull(GraphQLString) },
-                booksid: { type: new GraphQLList(GraphQLID) },
                 membershipFee: { type: new GraphQLNonNull(GraphQLString) },
                 houseRules: { type: GraphQLString },
                 additionalFeaturs: { type: GraphQLString },
@@ -139,7 +137,6 @@ const Mutation = new GraphQLObjectType({
                 let library = new Library({
                     name: args.name,
                     address: args.address,
-                    booksid: args.booksid,
                     membershipFee: args.membershipFee,
                     houseRules: args.houseRules,
                     additionalFeaturs: args.additionalFeatures,
@@ -154,14 +151,14 @@ const Mutation = new GraphQLObjectType({
                 name: { type: new GraphQLNonNull(GraphQLString) },
                 genre: { type: GraphQLString },
                 authorName: { type: new GraphQLNonNull(GraphQLString) },
-                librariesid: { type: new GraphQLList(GraphQLID) }
+                librariesId: { type: new GraphQLList(GraphQLID) }
             },
             resolve(parent, args) {
                 let book = new Book({
                     name: args.name,
                     genre: args.genre,
-                    authorId: args.authorId,
-                    librariesid: args.librariesid
+                    authorName: args.authorName,
+                    librariesId: args.librariesId
                 });
                 return book.save();
             }

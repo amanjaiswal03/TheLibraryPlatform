@@ -1,18 +1,13 @@
 import React, {Component} from 'react';
 import {getLibraryQuery} from '../queries/queries'
 import { graphql } from 'react-apollo';
+import { Link } from 'react-router-dom';
 
 //components
-import BookDetails from './BookDetails';
+import AddBook from './AddBook';
 
 
 class LibraryDetails extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            selected: null
-        }
-    }
     displayLibraryDetails(){
         const {library} =  this.props.data;
         if (library){
@@ -24,7 +19,11 @@ class LibraryDetails extends Component{
                     <p> All books in this library: </p>
                     <ul className = "all-books">
                         {library.books.map(book => {
-                            return <li key = {book.id} onClick = {(e) => this.setState({selected: book.id})}>{book.name}</li>
+                            return( 
+                                <Link to = {'/book/' + book.id} key={book.id}>
+                                    <li key = {book.id} >{book.name}<br></br> Author: {book.authorName}</li>
+                                </Link>
+                            )
                         })}
                     </ul>
                 </div>
@@ -39,6 +38,9 @@ class LibraryDetails extends Component{
             <div>
                 <div className="library-details">
                     {this.displayLibraryDetails()}
+                </div>
+                <div className = "add-book">
+                    <AddBook libraryId = {this.props.match.params.id} />
                 </div>
             </div>
         )

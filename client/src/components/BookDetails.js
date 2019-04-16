@@ -5,14 +5,13 @@ import {graphql} from 'react-apollo';
 class BookDetails extends Component{
     displayBookDetails(){
         console.log(this.props);
-        const {book} =  this.props.data;
+        const {book} =  this.props.getBookQuery;
         if (book){
-            console.log(this.props.data);
             return(
                 <div>
                     <h2>Name: {book.name}</h2>
                     <p> Genre: {book.genre}</p>
-                    <p> Author: {book.author.name}</p>
+                    <p> Author: {book.authorName}</p>
                 </div>
             )
         }
@@ -35,8 +34,9 @@ export default graphql(getBookQuery, {
     options: (props) => {
         return {
             variables: {
-                id: props.bookId
+                id: props.match.params.id
             }
         }
-    }
+    },
+    name: "getBookQuery"
 })(BookDetails);

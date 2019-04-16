@@ -20,12 +20,13 @@ class AddBook extends Component {
                 name: this.state.authorName,
             }
         })
-        //console.log(this.props);
+        console.log([this.props.libraryId]);
         this.props.addBookMutation({
             variables: {
                 name: this.state.name,
                 genre: this.state.genre,
-                authorName: this.state.authorName
+                authorName: this.state.authorName,
+                librariesId:this.props.libraryId 
             }
         })
 
@@ -33,6 +34,7 @@ class AddBook extends Component {
     render(){
         return(
             <form id = "add-book" onSubmit = {this.submitForm.bind(this)}>
+                <h3> Add Book To This Library</h3>
                 <div className="field">
                     <label>Book Name:</label>
                     <input type = "text" onChange = {(e)=> {this.setState({name: e.target.value})}} required></input>

@@ -8,9 +8,10 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 //components
 import LibraryList from './components/LibraryList';
 import AddLibrary from './components/AddLibrary';
-import NavbarLinks from './components/layout/navbar'
-import Homepage from './components/Homepage'
-import libraryDetails from './components/LibraryDetails'
+import NavbarLinks from './components/layout/navbar';
+import Homepage from './components/Homepage';
+import LibraryDetails from './components/LibraryDetails';
+import BookDetails from './components/BookDetails';
 
 
 //apollo client setup
@@ -29,7 +30,8 @@ class App extends Component {
             <Route exact path = '/' component = {Homepage} />
             <Route path = '/libraries' component = {LibraryList} />
             <Route path = '/addLibrary' component = {AddLibrary} />
-            <Route path = '/library/:id' component = {libraryDetails} />
+            <Route path = '/library/:id' component = {LibraryDetails} />
+            <Route path = '/book/:id' component = {BookDetails} />
           </Switch>
         </BrowserRouter>
       </ApolloProvider>

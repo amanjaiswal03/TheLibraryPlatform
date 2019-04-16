@@ -10,10 +10,8 @@ const getAuthorsQuery = gql`
 `
 const getBooksQuery = gql`
     {
-        author{
-            name
-            id
-        }
+        authorName
+
     }
 `
 
@@ -36,10 +34,7 @@ const getLibraryQuery = gql`
             books{
                 name
                 id
-                author{
-                    name
-                    id
-                }
+                authorName
             }
         }
     }
@@ -52,11 +47,11 @@ const getBookQuery = gql`
             id
             name
             genre
+            authorName
             library{
                 name
             }
             author{
-                id
                 name
             }
         }
@@ -86,11 +81,12 @@ const addLibraryMutation = gql`
 
 const addBookMutation = gql`
     mutation AddBook($name: String!, $genre: String!, $authorName: String!, $librariesId: [ID]){
-        addBook(name: $name, genre: $genre, authorName: $authorName, librariesid: $librariesId){
+        addBook(name: $name, genre: $genre, authorName: $authorName, librariesId: $librariesId){
             name
             genre
             id
             authorName
+            librariesId
         }
     }
 `

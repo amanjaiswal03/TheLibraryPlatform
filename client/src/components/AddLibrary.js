@@ -35,7 +35,7 @@ class AddLibrary extends Component {
                 </div>
                 <div className="field">
                     <label>MembershipFee:</label>
-                    <input type = "text" onChange = {(e)=> {this.setState({membershipFee: e.target.value})}} required></input>
+                    <input type = "Number" onChange = {(e)=> {this.setState({membershipFee: e.target.value})}} required></input>
                 </div>
                 <button> Create library </button>
             </form>
