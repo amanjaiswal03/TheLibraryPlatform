@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {getLibraryQuery} from '../queries/queries'
-import { graphql } from 'react-apollo';
+import {getLibraryQuery, removeBookMutation} from '../queries/queries'
+import { graphql, compose } from 'react-apollo';
 import { Link } from 'react-router-dom';
 
 //components
@@ -8,8 +8,10 @@ import AddBook from './AddBook';
 
 
 class LibraryDetails extends Component{
+
     displayLibraryDetails(){
-        const {library} =  this.props.data;
+        console.log(this.props.getLibraryQuery);
+        const {library} =  this.props.getLibraryQuery;
         if (library){
             return(
                 <div>
@@ -19,10 +21,13 @@ class LibraryDetails extends Component{
                     <p> All books in this library: </p>
                     <ul className = "all-books">
                         {library.books.map(book => {
-                            return( 
-                                <Link to = {'/book/' + book.id} key={book.id}>
-                                    <li key = {book.id} >{book.name}<br></br> Author: {book.authorName}</li>
-                                </Link>
+                            return(
+                                <div key = {book.id}>
+                                    <Link to = {'/book/' + book.id}>
+                                        <li key = {book.id} >{book.name}<br></br> Author: {book.authorName}</li>
+                                    </Link>
+                                    <button onClick = {()=> {this.props.removeBookMutation({variables:{id: book.id}}); this.props.getLibraryQuery.refetch() }}> Remove Book </button>
+                                </div>
                             )
                         })}
                     </ul>
@@ -40,19 +45,22 @@ class LibraryDetails extends Component{
                     {this.displayLibraryDetails()}
                 </div>
                 <div className = "add-book">
-                    <AddBook libraryId = {this.props.match.params.id} />
+                    <AddBook libraryId = {this.props.match.params.id} fetch = {this.props.getLibraryQuery}/>
                 </div>
             </div>
         )
     }
 }
 
-export default graphql(getLibraryQuery, {
+export default compose(graphql(getLibraryQuery, {
     options: (props) => {
         return {
             variables: {
                 id: props.match.params.id
             }
         }
-    }
-})(LibraryDetails);
+    },
+    name: "getLibraryQuery",
+}),
+graphql(removeBookMutation, {name: "removeBookMutation"})
+)(LibraryDetails);

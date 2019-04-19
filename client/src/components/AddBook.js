@@ -3,6 +3,8 @@ import {graphql, compose } from 'react-apollo';
 import { addBookMutation, addAuthorMutation} from '../queries/queries';
 
 
+
+
 class AddBook extends Component {
     constructor(props){
         super(props);
@@ -15,12 +17,12 @@ class AddBook extends Component {
     };
     submitForm(e){
         e.preventDefault();
+        console.log(this.props);
         this.props.addAuthorMutation({
             variables: {
                 name: this.state.authorName,
             }
-        })
-        console.log([this.props.libraryId]);
+        });
         this.props.addBookMutation({
             variables: {
                 name: this.state.name,
@@ -28,7 +30,8 @@ class AddBook extends Component {
                 authorName: this.state.authorName,
                 librariesId:this.props.libraryId 
             }
-        })
+        });
+        this.props.fetch.refetch();
 
     }
     render(){
@@ -44,8 +47,8 @@ class AddBook extends Component {
                     <input type = "text" onChange = {(e)=> {this.setState({genre: e.target.value})}} required></input>
                 </div>
                 <div className="field">
-                        <label>Author Name:</label>
-                        <input type = "text" onChange = {(e)=> {this.setState({authorName: e.target.value})}} required></input>
+                    <label>Author Name:</label>
+                    <input type = "text" onChange = {(e)=> {this.setState({authorName: e.target.value})}} required></input>
                 </div>
                 <button> Add book </button>
             </form>

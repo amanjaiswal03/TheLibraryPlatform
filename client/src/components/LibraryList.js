@@ -4,6 +4,13 @@ import { graphql } from 'react-apollo';
 
 import {Link} from 'react-router-dom';
 
+//material - ui component
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+
 
 class LibraryList extends Component{
     displayLibraries(){
@@ -14,8 +21,15 @@ class LibraryList extends Component{
             return data.libraries.map(library => {
                 return(
                     <Link to = {'/library/' + library.id} key={library.id}>
-                        <li key = {library.id}>{library.name} <br></br> Address: {library.address} </li>
-                        <br></br>
+                        <Card id = "liblist">
+                            <CardContent>
+                                <Typography variant="h5" component="h2">{library.name} </Typography> 
+                                <Typography component="p"> Address: {library.address}  </Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Button size="small">Details</Button>
+                            </CardActions>
+                        </Card>
                     </Link>
                 );
             })
@@ -25,7 +39,7 @@ class LibraryList extends Component{
         console.log(this.props);
         return(
             <div>
-                <ul id="libraries-list">
+                <ul className="libraries-list">
                     { this.displayLibraries() }
                 </ul>
             </div>

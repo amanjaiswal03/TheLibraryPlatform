@@ -163,6 +163,7 @@ const Mutation = new GraphQLObjectType({
                 return book.save();
             }
         },
+        
         addAuthor: {
             type: AuthorType,
             args: {
@@ -173,6 +174,15 @@ const Mutation = new GraphQLObjectType({
                     name: args.name
                 });
                 return author.save();
+            }
+        },
+        removeBook: {
+            type: BookType,
+            args: {
+                id: {type: new GraphQLNonNull(GraphQLID)}
+            },
+            resolve(parent, args){
+                return Book.findByIdAndDelete(args.id);
             }
         }
     })
