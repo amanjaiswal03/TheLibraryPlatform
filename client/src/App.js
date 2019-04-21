@@ -12,6 +12,7 @@ import NavbarLinks from './components/layout/navbar';
 import Homepage from './components/Homepage';
 import LibraryDetails from './components/LibraryDetails';
 import BookDetails from './components/BookDetails';
+import SearchResult from './components/SearchResult';
 
 
 //apollo client setup
@@ -32,6 +33,7 @@ class App extends Component {
             <Route path = '/addLibrary' component = {AddLibrary} />
             <Route path = '/library/:id' component = {LibraryDetails} />
             <Route path = '/book/:id' component = {BookDetails} />
+            <Route path = '/search/:query' component = {SearchResult} />
           </Switch>
         </BrowserRouter>
       </ApolloProvider>

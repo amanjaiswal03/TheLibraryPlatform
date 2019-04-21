@@ -10,8 +10,12 @@ const getAuthorsQuery = gql`
 `
 const getBooksQuery = gql`
     {
-        authorName
-
+        books{
+            id
+            name
+            genre
+            authorName
+        }
     }
 `
 
@@ -106,4 +110,6 @@ const removeBookMutation = gql `
     }
 `
 
-export { addAuthorMutation, removeBookMutation, getAuthorsQuery,  getLibrariesQuery,getBooksQuery, getLibraryQuery, getBookQuery,getAuthorNQuery, addLibraryMutation, addBookMutation} ;
+
+
+export {  addAuthorMutation, removeBookMutation, getAuthorsQuery,  getLibrariesQuery,getBooksQuery, getLibraryQuery, getBookQuery,getAuthorNQuery, addLibraryMutation, addBookMutation} ;

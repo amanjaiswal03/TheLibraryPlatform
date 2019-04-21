@@ -16,7 +16,7 @@ class LibraryList extends Component{
     displayLibraries(){
         var data = this.props.data;
         if(data.loading){
-            return (<div> Loading books... </div>);
+            return (<div> Loading libraries... </div>);
         } else{
             return data.libraries.map(library => {
                 return(

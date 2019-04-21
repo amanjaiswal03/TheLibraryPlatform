@@ -22,6 +22,20 @@ body {
 .homepage .alllib {
   margin-top: 20px;
 }
+.root {
+  padding: 2px 40px;
+  display: flex;
+  align-items: center;
+  width: 900px ;
+  height: 60px;
+}
+.input{
+  margin-left: 8;
+  flex: 1;
+}
+.iconButton{
+  padding: 10
+}
 /* navbar */
 
 div.navbar {
@@ -44,6 +58,14 @@ ul.right li {
 Button.alllib {
   background-color:#3F51B5 !important;
   color: White;
+}
+
+Button.search {
+  margin-top: 10px;
+  background-color:#3F51B5 !important;
+  color: White;
+  display: flex;
+  justify-content: center;
 }
 
 ul.libraries-list {
