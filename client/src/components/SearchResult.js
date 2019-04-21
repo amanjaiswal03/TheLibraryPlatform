@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {getLibrariesQuery, getBooksQuery} from '../queries/queries';
+import {getLibrariesQuery, getBooksQuery, searchBook} from '../queries/queries';
 import { graphql, compose } from 'react-apollo';
 
 import {Link} from 'react-router-dom';
@@ -90,5 +90,14 @@ class SearchResult extends Component{
 
 export default compose(
     graphql(getLibrariesQuery, {name: "getLibrariesQuery"}),
-    graphql(getBooksQuery, {name: "getBooksQuery"} )
+    graphql(getBooksQuery, {name: "getBooksQuery"} ),
+    graphql(searchBook, {name: "searchBook",
+    options: (props) => {
+        return {
+            variables: {
+                searchQuery: props.match.params.query
+            }
+        }
+    },
+    } )
 ) (SearchResult);

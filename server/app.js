@@ -9,7 +9,7 @@ const app = express();
 // allow cross origin requests
 app.use(cors());
 
-mongoose.connect("mongodb://library:library123@ds149914.mlab.com:49914/library-platform");
+mongoose.connect("mongodb+srv://aman:aman123@cluster0-0lauy.mongodb.net/test?retryWrites=true");
 mongoose.connection.once('open', () => {
     console.log('connected to the database');
 })

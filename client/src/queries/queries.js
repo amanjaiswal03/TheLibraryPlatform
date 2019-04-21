@@ -1,7 +1,7 @@
 import {gql} from 'apollo-boost';
 
 const getAuthorsQuery = gql`
-    {
+    query {
         author{
             name
             id
@@ -9,7 +9,7 @@ const getAuthorsQuery = gql`
     }
 `
 const getBooksQuery = gql`
-    {
+    query {
         books{
             id
             name
@@ -20,7 +20,7 @@ const getBooksQuery = gql`
 `
 
 const getLibrariesQuery = gql`
-    {
+    query {
         libraries{
             name
             id
@@ -110,6 +110,20 @@ const removeBookMutation = gql `
     }
 `
 
+const searchBook = gql `
+    query searchBook($searchQuery: String){
+        books(filter: {
+            name: {
+                contains: $searchQuery
+            }
+        }) {
+            name
+            genre
+            authorName
+        }
+    }
+`
 
 
-export {  addAuthorMutation, removeBookMutation, getAuthorsQuery,  getLibrariesQuery,getBooksQuery, getLibraryQuery, getBookQuery,getAuthorNQuery, addLibraryMutation, addBookMutation} ;
+
+export {  searchBook, addAuthorMutation, removeBookMutation, getAuthorsQuery,  getLibrariesQuery,getBooksQuery, getLibraryQuery, getBookQuery,getAuthorNQuery, addLibraryMutation, addBookMutation} ;
