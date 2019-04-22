@@ -37,7 +37,7 @@ class Homepage extends Component {
         <form onSubmit = {this.submitForm.bind(this)}>
           {this.renderRedirect()}
           <Paper className= "root" elevation={1}>
-              <InputBase className="input" placeholder="Search for books or libraries near you.." onChange = {(e)=> {this.setState({search: e.target.value})}} required/>
+              <InputBase className="input" placeholder="Search for books near you.." onChange = {(e)=> {this.setState({search: e.target.value})}} required/>
               <IconButton className= "iconButton" aria-label="Search">
                   <SearchIcon />
               </IconButton>
