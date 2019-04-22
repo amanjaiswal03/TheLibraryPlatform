@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {getLibrariesQuery, getBooksQuery, searchBook} from '../queries/queries';
+import {getLibrariesQuery, getBooksQuery} from '../queries/queries';
 import { graphql, compose } from 'react-apollo';
 
 import {Link} from 'react-router-dom';
@@ -37,11 +37,11 @@ class SearchResult extends Component{
         var libraryList = this.props.getLibrariesQuery;
         var bookList = this.props.getBooksQuery;
 
-        if(bookList.loading && libraryList.loading){
+        if(bookList.loading || libraryList.loading){
             return (<div> Loading results... </div>);
         }
         else {
-            var filtered = bookList.books.filter(book => book.name.toLowerCase() === this.state.search.toLowerCase());
+            var filtered = bookList.books.sort().filter((book) => { return book.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1});
             console.log(filtered);
             if (filtered.length === 0){
                 return (<h1> No results found </h1>)
@@ -71,7 +71,7 @@ class SearchResult extends Component{
             <div>
             <form onSubmit = {this.submitForm.bind(this)}>
                 <Paper className= "root" elevation={1}>
-                    <InputBase className="input" placeholder={this.state.search} onChange = {(e)=> {this.setState({temp: e.target.value})}} />
+                    <InputBase className="input" placeholder="Search for books ..." onChange = {(e)=> {this.setState({temp: e.target.value})}} />
                     <IconButton className= "iconButton" aria-label="Search">
                         <SearchIcon />
                     </IconButton>
@@ -91,13 +91,4 @@ class SearchResult extends Component{
 export default compose(
     graphql(getLibrariesQuery, {name: "getLibrariesQuery"}),
     graphql(getBooksQuery, {name: "getBooksQuery"} ),
-    graphql(searchBook, {name: "searchBook",
-    options: (props) => {
-        return {
-            variables: {
-                searchQuery: props.match.params.query
-            }
-        }
-    },
-    } )
 ) (SearchResult);
