@@ -26,7 +26,7 @@ class LibraryDetails extends Component{
                                     <Link to = {'/book/' + book.id}>
                                         <li key = {book.id} >{book.name}<br></br> Author: {book.authorName}</li>
                                     </Link>
-                                    <button onClick = {()=> {this.props.removeBookMutation({variables:{id: book.id}, refetchQueries: [{ query: getBooksQuery }]}); this.props.getLibraryQuery.refetch() }}> Remove Book </button>
+                                    <button onClick = {()=> {this.props.removeBookMutation({variables:{id: book.id, librariesId: this.props.match.params.id}, refetchQueries: [{ query: getBooksQuery }]}); this.props.getLibraryQuery.refetch() }}> Remove Book </button>
                                 </div>
                             )
                         })}

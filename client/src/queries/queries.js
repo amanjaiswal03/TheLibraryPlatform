@@ -105,27 +105,15 @@ const addAuthorMutation = gql`
 `
 
 const removeBookMutation = gql `
-    mutation RemoveBook($id: ID!){
-        removeBook(id: $id){
+    mutation RemoveBook($id: ID!, $librariesId: [ID]!){
+        removeBook(id: $id, librariesId: $librariesId ){
             id
-        }
-    }
-`
-
-const searchBook = gql `
-    query searchBook($searchQuery: String){
-        books(filter: {
-            name: {
-                contains: $searchQuery
-            }
-        }) {
-            name
-            genre
-            authorName
+            librariesId
         }
     }
 `
 
 
 
-export {  searchBook, addAuthorMutation, removeBookMutation, getAuthorsQuery,  getLibrariesQuery,getBooksQuery, getLibraryQuery, getBookQuery,getAuthorNQuery, addLibraryMutation, addBookMutation} ;
+
+export {  addAuthorMutation, removeBookMutation, getAuthorsQuery,  getLibrariesQuery,getBooksQuery, getLibraryQuery, getBookQuery,getAuthorNQuery, addLibraryMutation, addBookMutation} ;

@@ -160,7 +160,19 @@ const Mutation = new GraphQLObjectType({
                     authorName: args.authorName,
                     librariesId: args.librariesId
                 });
-                return book.save();
+                return (Book.findOne({name: book.name, authorName: book.authorName}, function(err, doc){
+                    console.log(doc);
+                    if (err){
+                        return err
+                    }
+                    else if (!doc){
+                        return book.save();
+                    }
+                    else{
+                        doc.librariesId.push(book.librariesId[0]);
+                        return doc.save();
+                    }
+                }))
             }
         },
         
@@ -179,10 +191,20 @@ const Mutation = new GraphQLObjectType({
         removeBook: {
             type: BookType,
             args: {
-                id: {type: new GraphQLNonNull(GraphQLID)}
+                id: {type: new GraphQLNonNull(GraphQLID)},
+                librariesId: {type: new GraphQLList(GraphQLID)}
             },
             resolve(parent, args){
-                return Book.findByIdAndDelete(args.id);
+                return (Book.findOne({_id: args.id}, function(err, doc){
+                    console.log(doc);
+                    if (err){
+                        return err
+                    }
+                    else{
+                        doc.librariesId.splice(doc.librariesId.indexOf(args.librariesId[0]), 1);
+                        return doc.save();
+                    }
+                }))
             }
         }
     })
