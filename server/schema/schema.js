@@ -23,7 +23,7 @@ const BookType = new GraphQLObjectType({
         library: {
             type: new GraphQLList(LibraryType),
             resolve(parent, args) {
-                return Library.find({ booksid: parent.id });
+                return Library.find({_id: {$in: parent.librariesId} });
             }
         }
     })

@@ -54,6 +54,8 @@ const getBookQuery = gql`
             authorName
             library{
                 name
+                address
+                id
             }
             author{
                 name
