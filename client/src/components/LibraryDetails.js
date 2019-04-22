@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {getLibraryQuery, removeBookMutation} from '../queries/queries'
+import {getLibraryQuery, removeBookMutation, getBooksQuery} from '../queries/queries'
 import { graphql, compose } from 'react-apollo';
 import { Link } from 'react-router-dom';
 
@@ -26,7 +26,7 @@ class LibraryDetails extends Component{
                                     <Link to = {'/book/' + book.id}>
                                         <li key = {book.id} >{book.name}<br></br> Author: {book.authorName}</li>
                                     </Link>
-                                    <button onClick = {()=> {this.props.removeBookMutation({variables:{id: book.id}}); this.props.getLibraryQuery.refetch() }}> Remove Book </button>
+                                    <button onClick = {()=> {this.props.removeBookMutation({variables:{id: book.id}, refetchQueries: [{ query: getBooksQuery }]}); this.props.getLibraryQuery.refetch() }}> Remove Book </button>
                                 </div>
                             )
                         })}
