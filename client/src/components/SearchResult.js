@@ -41,7 +41,11 @@ class SearchResult extends Component{
             return (<div> Loading results... </div>);
         }
         else {
-            var filtered = bookList.books.sort().filter((book) => { return book.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1});
+            var filtered = bookList.books.sort(function(a, b) {
+                var textA = a.name.toUpperCase();
+                var textB = b.name.toUpperCase();
+                return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+            }).filter((book) => { return book.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1});
             console.log(filtered);
             if (filtered.length === 0){
                 return (<h1> No results found </h1>)
