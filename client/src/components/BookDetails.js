@@ -34,8 +34,8 @@ class BookDetails extends Component{
                                     <Button size="small">Details</Button>
                                 </CardActions>
                             </Card>
-                        </Link>)
-                        })
+                        </Link>)}
+                        )
                     } </div>
                 </div>
             )
