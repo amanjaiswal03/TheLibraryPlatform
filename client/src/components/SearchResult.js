@@ -77,10 +77,9 @@ class SearchResult extends Component{
                 <Paper className= "root" elevation={1}>
                     <InputBase className="input" placeholder="Search for books ..." onChange = {(e)=> {this.setState({temp: e.target.value})}} />
                     <IconButton className= "iconButton" aria-label="Search">
-                        <SearchIcon />
+                    <Link to = {"search/" + this.state.search}><SearchIcon /></Link>
                     </IconButton>
                 </Paper>
-                <Button className = "search" type = "submit"> Search </Button>
             </form>
             <div className="results">
                 {this.displayResult()}

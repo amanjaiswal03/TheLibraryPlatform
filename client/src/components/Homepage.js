@@ -39,10 +39,9 @@ class Homepage extends Component {
           <Paper className= "root" elevation={1}>
               <InputBase className="input" placeholder="Search for books near you.." onChange = {(e)=> {this.setState({search: e.target.value})}} required/>
               <IconButton className= "iconButton" aria-label="Search">
-                  <SearchIcon />
+              <Link to = {"search/" + this.state.search}><SearchIcon /></Link>
               </IconButton>
           </Paper>
-          <Button className = "search"> <Link to = {"search/" + this.state.search} className = "link" >Search </Link></Button>
         </form>
         <Link to = "libraries" className = "link"><Button className = "alllib"> All libraries Near you </Button></Link>
       </div>
