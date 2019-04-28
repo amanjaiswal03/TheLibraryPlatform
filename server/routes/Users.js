@@ -70,7 +70,8 @@ users.post('/login', (req, res) => {
         const payload = {
           _id: user._id,
           first_name: user.first_name,
-          last_name: user.last_name
+          last_name: user.last_name,
+          email: user.email
         };
 // Sign token
         jwt.sign(
