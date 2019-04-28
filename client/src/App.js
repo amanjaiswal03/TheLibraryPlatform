@@ -13,6 +13,9 @@ import Homepage from './components/Homepage';
 import LibraryDetails from './components/LibraryDetails';
 import BookDetails from './components/BookDetails';
 import SearchResult from './components/SearchResult';
+import Login from './components/Login'
+import Register from './components/Register'
+import Profile from './components/Profile'
 
 
 //apollo client setup
@@ -27,14 +30,15 @@ class App extends Component {
       <ApolloProvider client = {client}>
         <BrowserRouter>
           <NavbarLinks />
-          <Switch>
             <Route exact path = '/' component = {Homepage} />
-            <Route path = '/libraries' component = {LibraryList} />
-            <Route path = '/addLibrary' component = {AddLibrary} />
-            <Route path = '/library/:id' component = {LibraryDetails} />
-            <Route path = '/book/:id' component = {BookDetails} />
-            <Route path = '/search/:query' component = {SearchResult} />
-          </Switch>
+            <Route exact path = '/libraries' component = {LibraryList} />
+            <Route exact path = '/addLibrary' component = {AddLibrary} />
+            <Route exact path = '/register' component = {Register} />
+            <Route exact path = '/login' component = {Login} />
+            <Route exact path = '/profile' component = {Profile} />
+            <Route exact path = '/library/:id' component = {LibraryDetails} />
+            <Route exact path = '/book/:id' component = {BookDetails} />
+            <Route exact path = '/search/:query' component = {SearchResult} />
         </BrowserRouter>
       </ApolloProvider>
     );
