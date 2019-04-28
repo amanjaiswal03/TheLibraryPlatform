@@ -9,7 +9,15 @@ export const register = newUser => {
             password: newUser.password,
         })
         .then(res => {
-            console.log('Registered!')
+            if(res.data){
+                return res.data
+            }
+            else {
+                return res.error
+            }           
+        })
+        .catch(err => {
+            console.log(err)
         })
 }
 
@@ -20,10 +28,15 @@ export const login = user => {
             password: user.password
         })
         .then(res => {
-            localStorage.setItem('usertoken', res.data)
-            return res.data
+            if(res.data){
+                localStorage.setItem('usertoken', res.data)
+                return res.data
+            }
+            else {
+                return res.error
+            }
         })
-        .catch(err => {
+        .catch(err =>{
             console.log(err)
         })
 }
