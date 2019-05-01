@@ -2,6 +2,7 @@ const graphql = require('graphql');
 const Library = require('../models/library');
 const Book = require('../models/book');
 const Author = require('../models/author');
+const User = require('../models/User')
 
 const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLInt, GraphQLSchema, GraphQLList, GraphQLFloat, GraphQLNonNull } = graphql;
 
@@ -49,6 +50,7 @@ const LibraryType = new GraphQLObjectType({
         id: { type: GraphQLID },
         name: { type: GraphQLString },
         address: { type: GraphQLString },
+        userId: {type: GraphQLID},
         books: {
             type: GraphQLList(BookType),
             resolve(parent, args) {
@@ -58,9 +60,32 @@ const LibraryType = new GraphQLObjectType({
         membershipFee: { type: GraphQLFloat },
         houseRules: { type: GraphQLString },
         additionalFeatures: { type: GraphQLString },
-        reviews: { type: GraphQLString }
+        reviews: { type: GraphQLString },
+        User: {
+            type: UserType,
+            resolve(parent, args){
+                return User.findOne({_id: parent.userId})
+            }
+        }
     })
 })
+
+const UserType = new GraphQLObjectType({
+    name: 'User',
+    fields: () => ({
+        id: {type: GraphQLID},
+        first_name: {type: GraphQLString},
+        last_name: {type: GraphQLString},
+        email: {type: GraphQLString},
+        library: {
+            type: new GraphQLList(LibraryType),
+            resolve(parent, args) {
+                return Library.find({userId: parent.id });
+            }
+        }
+    })
+})
+
 
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
@@ -70,6 +95,13 @@ const RootQuery = new GraphQLObjectType({
             args: { id: { type: GraphQLID } },
             resolve(parents, args) {
                 return Library.findById(args.id);
+            }
+        },
+        libraryUser: {
+            type: LibraryType,
+            args: { userId: { type: GraphQLID } },
+            resolve(parents, args) {
+                return Library.find({userId: args.userId});
             }
         },
         book: {
@@ -129,6 +161,7 @@ const Mutation = new GraphQLObjectType({
                 name: { type: new GraphQLNonNull(GraphQLString) },
                 address: { type: new GraphQLNonNull(GraphQLString) },
                 membershipFee: { type: new GraphQLNonNull(GraphQLString) },
+                userId: { type: new GraphQLNonNull(GraphQLID) },
                 houseRules: { type: GraphQLString },
                 additionalFeaturs: { type: GraphQLString },
                 reviews: { type: GraphQLString }

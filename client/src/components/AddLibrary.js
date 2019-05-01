@@ -3,14 +3,25 @@ import {graphql, compose } from 'react-apollo';
 import { addLibraryMutation,getLibrariesQuery} from '../queries/queries';
 import {Redirect} from 'react-router-dom'
 
+import jwt_decode from 'jwt-decode'
+
 class AddLibrary extends Component {
     constructor(props){
         super(props);
         this.state = {
             name: '',
             address: '',
-            membershipFee: ''
+            membershipFee: '',
+            userId: ''
         };
+    }
+    componentDidMount () {
+        const token = localStorage.usertoken
+        const decoded = jwt_decode(token)
+        console.log(decoded);
+        this.setState({
+            userId: decoded.id
+        })
     }
     submitForm(e){
         e.preventDefault();
@@ -18,7 +29,8 @@ class AddLibrary extends Component {
             variables: {
                 name: this.state.name,
                 address: this.state.address,
-                membershipFee: this.state.membershipFee
+                membershipFee: this.state.membershipFee,
+                userId: this.state.userId
             },
             refetchQueries: [{ query: getLibrariesQuery }]
         })

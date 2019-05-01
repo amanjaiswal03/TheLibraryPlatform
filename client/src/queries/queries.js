@@ -40,10 +40,32 @@ const getLibraryQuery = gql`
                 id
                 authorName
             }
+            User{
+                email
+            }
         }
     }
 
 `
+const getLibraryByUserQuery = gql`
+    query GetLibraryByUser($userId: ID){
+        libraryUser(userId: $userId){
+            id
+            name
+            address
+            membershipFee
+            books{
+                name
+                id
+                authorName
+            }
+            User{
+                email
+            }
+        }
+    }
+`
+
 
 const getBookQuery = gql`
     query GetBook($id: ID){
@@ -75,12 +97,17 @@ const getAuthorNQuery = gql`
 
 
 const addLibraryMutation = gql`
-    mutation AddLibrary($name: String!, $address: String!, $membershipFee: String!){
-        addLibrary(name: $name, address: $address, membershipFee: $membershipFee){
+    mutation AddLibrary($name: String!, $address: String!, $membershipFee: String!, $userId: ID){
+        addLibrary(name: $name, address: $address, membershipFee: $membershipFee, userId: $userId){
             name
             id
             address
             membershipFee
+            User{
+                first_name
+                last_name
+                email
+            }
         }
     }
 `
@@ -116,4 +143,4 @@ const removeBookMutation = gql `
 
 
 
-export {  addAuthorMutation, removeBookMutation, getAuthorsQuery,  getLibrariesQuery,getBooksQuery, getLibraryQuery, getBookQuery,getAuthorNQuery, addLibraryMutation, addBookMutation} ;
+export {  addAuthorMutation, removeBookMutation, getAuthorsQuery,  getLibrariesQuery,getBooksQuery, getLibraryQuery, getBookQuery,getAuthorNQuery,getLibraryByUserQuery, addLibraryMutation, addBookMutation} ;
