@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import { login } from './UserFunctions'
 
 class Login extends Component {
@@ -8,7 +8,7 @@ class Login extends Component {
         this.state = {
             email: '',
             password: '',
-            errors: ''
+            errors: null
         }
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
@@ -29,9 +29,9 @@ class Login extends Component {
         login(user).then((res) => {
             if (res.error) {
                 this.setState({errors: res.error})
-                window.alert(this.state.errors);
             }
             else {
+                this.setState({errors: null})
                 this.props.history.push(`/`)
             }
         })
@@ -39,6 +39,7 @@ class Login extends Component {
     }
 
     render() {
+        if(localStorage.usertoken) return <Redirect to = '/' />
     return (
           <div className="container">
             <div style={{ marginTop: "4rem" }} className="row">
@@ -86,6 +87,9 @@ class Login extends Component {
                     >
                       Login
                     </button>
+                    <div className="red-text center">
+                        {this.state.errors ? <p> {this.state.errors} </p> : null }
+                    </div>
                   </div>
                 </form>
               </div>

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {graphql, compose } from 'react-apollo';
 import { addLibraryMutation,getLibrariesQuery} from '../queries/queries';
+import {Redirect} from 'react-router-dom'
 
 class AddLibrary extends Component {
     constructor(props){
@@ -23,6 +24,7 @@ class AddLibrary extends Component {
         })
     }
     render(){
+        if(!localStorage.usertoken) return <Redirect to = '/login' />
         return(
             <form id = "add-library" onSubmit = {this.submitForm.bind(this)}>
                 <div className="field">

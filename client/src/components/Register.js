@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import { register } from './UserFunctions'
 
 class Register extends Component {
@@ -10,7 +10,7 @@ class Register extends Component {
             last_name: '',
             email: '',
             password: '',
-            errors: ''
+            errors: null
         }
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
@@ -33,16 +33,17 @@ class Register extends Component {
         register(user).then(res => {
             if (res.error) {
                 this.setState({errors: res.error})
-                window.alert(this.state.errors);
             }
             else {
                 window.alert("Successfully registered")
+                this.setState({errors: null})
                 this.props.history.push(`/login`)
             }
         })
     }
 
     render() {
+        if(localStorage.usertoken) return <Redirect to = '/' />
     return (
           <div className="container">
             <div className="row">
@@ -111,6 +112,9 @@ class Register extends Component {
                     >
                       Sign up
                     </button>
+                    <div className="red-text center">
+                        {this.state.errors ? <p> {this.state.errors} </p> : null }
+                    </div>
                   </div>
                 </form>
               </div>

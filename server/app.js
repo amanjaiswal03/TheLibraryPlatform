@@ -20,7 +20,7 @@ var Users = require('./routes/Users')
 
 app.use('/users', Users)
 
-mongoose.connect("mongodb+srv://aman:aman123@cluster0-0lauy.mongodb.net/test?retryWrites=true");
+mongoose.connect("mongodb+srv://aman:aman123@cluster0-0lauy.mongodb.net/test?retryWrites=true", { useNewUrlParser: true });
 mongoose.connection.once('open', () => {
     console.log('connected to the database');
 })
