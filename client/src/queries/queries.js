@@ -35,6 +35,7 @@ const getLibraryQuery = gql`
             name
             address
             membershipFee
+            userId
             books{
                 name
                 id

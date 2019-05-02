@@ -2,12 +2,49 @@ import React, {Component} from 'react';
 import {getLibraryQuery, removeBookMutation, getBooksQuery} from '../queries/queries'
 import { graphql, compose } from 'react-apollo';
 import { Link } from 'react-router-dom';
+import jwt_decode from 'jwt-decode'
 
 //components
 import AddBook from './AddBook';
 
 
 class LibraryDetails extends Component{
+
+    removeBook(book){
+        if(this.props.getLibraryQuery.library && localStorage.usertoken){
+            if (this.props.getLibraryQuery.library.userId === jwt_decode(localStorage.usertoken)._id)
+            {
+                return (
+                    <button onClick = {()=> {
+                            this.props.removeBookMutation({variables:{id: book.id, librariesId: this.props.match.params.id}, refetchQueries: [{ query: getBooksQuery }]}); 
+                            this.props.getLibraryQuery.refetch() 
+                        }
+                    }> Remove Book </button>
+                )
+            }
+            else{
+                return null;
+            }
+        }
+        else {
+            return null
+        }
+    }
+
+    addBook(){
+        if(this.props.getLibraryQuery.library && localStorage.usertoken){
+            console.log(this.props.getLibraryQuery.library);
+            if (this.props.getLibraryQuery.library.userId === jwt_decode(localStorage.usertoken)._id){
+                return <AddBook libraryId = {this.props.match.params.id} fetch = {this.props.getLibraryQuery}/>
+            }
+            else {
+                return null
+            }
+        }
+        else{
+            return null
+        }
+    }
 
     displayLibraryDetails(){
         console.log(this.props.getLibraryQuery);
@@ -26,7 +63,7 @@ class LibraryDetails extends Component{
                                     <Link to = {'/book/' + book.id}>
                                         <li key = {book.id} >{book.name}<br></br> Author: {book.authorName}</li>
                                     </Link>
-                                    <button onClick = {()=> {this.props.removeBookMutation({variables:{id: book.id, librariesId: this.props.match.params.id}, refetchQueries: [{ query: getBooksQuery }]}); this.props.getLibraryQuery.refetch() }}> Remove Book </button>
+                                    {this.removeBook(book)}
                                 </div>
                             )
                         })}
@@ -44,9 +81,7 @@ class LibraryDetails extends Component{
                 <div className="library-details">
                     {this.displayLibraryDetails()}
                 </div>
-                <div className = "add-book">
-                    <AddBook libraryId = {this.props.match.params.id} fetch = {this.props.getLibraryQuery}/>
-                </div>
+                {this.addBook()}
             </div>
         )
     }

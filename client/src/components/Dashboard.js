@@ -52,7 +52,7 @@ class Dashboard extends Component{
 }
 
 export default compose(graphql(getLibraryByUserQuery, {
-    options: (props) => {
+    options: () => {
         return {
             variables: {
                 id: jwt_decode(localStorage.usertoken)._id

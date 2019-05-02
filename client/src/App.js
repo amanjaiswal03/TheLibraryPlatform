@@ -18,7 +18,6 @@ import Register from './components/Register'
 import Profile from './components/Profile'
 import Dashboard from './components/Dashboard'
 
-import jwt_decode from 'jwt-decode'
 
 
 //apollo client setup

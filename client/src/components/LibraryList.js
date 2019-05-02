@@ -17,7 +17,11 @@ class LibraryList extends Component{
         var data = this.props.data;
         if(data.loading){
             return (<div> Loading libraries... </div>);
-        } else{
+        }
+        else if (data.libraries.length === 0){
+            return (<div> No Libraries </div>)
+        } 
+        else{
             return data.libraries.map(library => {
                 return(
                     <Link to = {'/library/' + library.id} key={library.id}>

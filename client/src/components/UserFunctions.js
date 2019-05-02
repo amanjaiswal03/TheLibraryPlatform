@@ -9,12 +9,7 @@ export const register = newUser => {
             password: newUser.password,
         })
         .then(res => {
-            if(res.data){
-                return res.data
-            }
-            else {
-                return res.error
-            }           
+            return res          
         })
         .catch(err => {
             console.log(err)
@@ -28,13 +23,11 @@ export const login = user => {
             password: user.password
         })
         .then(res => {
-            if(res.data){
+            console.log(res)
+            if(res.data && !res.data.error){
                 localStorage.setItem('usertoken', res.data)
-                return res.data
             }
-            else {
-                return res.error
-            }
+            return res
         })
         .catch(err =>{
             console.log(err)

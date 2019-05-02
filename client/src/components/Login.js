@@ -27,8 +27,9 @@ class Login extends Component {
         }
 
         login(user).then((res) => {
-            if (res.error) {
-                this.setState({errors: res.error})
+            //console.log(res)
+            if (res.data.error) {
+                this.setState({errors: res.data.error})
             }
             else {
                 this.setState({errors: null})
@@ -39,8 +40,8 @@ class Login extends Component {
     }
 
     render() {
-        if(localStorage.usertoken) return <Redirect to = '/' />
-    return (
+      if(localStorage.usertoken) {return <Redirect to = '/' />}
+      return (
           <div className="container">
             <div style={{ marginTop: "4rem" }} className="row">
               <div className="col s8 offset-s2">

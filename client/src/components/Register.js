@@ -31,8 +31,8 @@ class Register extends Component {
         }
 
         register(user).then(res => {
-            if (res.error) {
-                this.setState({errors: res.error})
+            if (res.data.error) {
+                this.setState({errors: res.data.error})
             }
             else {
                 window.alert("Successfully registered")
