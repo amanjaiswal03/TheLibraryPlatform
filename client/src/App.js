@@ -16,6 +16,9 @@ import SearchResult from './components/SearchResult';
 import Login from './components/Login'
 import Register from './components/Register'
 import Profile from './components/Profile'
+import Dashboard from './components/Dashboard'
+
+import jwt_decode from 'jwt-decode'
 
 
 //apollo client setup
@@ -33,6 +36,7 @@ class App extends Component {
             <Route exact path = '/' component = {Homepage} />
             <Route exact path = '/libraries' component = {LibraryList} />
             <Route exact path = '/addLibrary' component = {AddLibrary} />
+            <Route exact path = '/dashboard' component = {Dashboard } />
             <Route exact path = '/register' component = {Register} />
             <Route exact path = '/login' component = {Login} />
             <Route exact path = '/profile' component = {Profile} />

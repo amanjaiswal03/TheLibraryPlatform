@@ -40,7 +40,7 @@ class NavBar extends Component {
           </Typography>
           <Button color="inherit">About</Button>
           <Button color="inherit"><Link to = '/addLibrary' className = "link">Create your library</Link></Button>
-          <Button color="inherit">Your Library</Button>
+          <Button color="inherit"><Link to = '/dashboard' className = "link">Your Library</Link></Button>
           <Button color="inherit"><Link to = '/profile' className = "link">Profile</Link></Button>
           <Button color="inherit" onClick={this.logOut.bind(this)}>Logout</Button>
         </Toolbar>

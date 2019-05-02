@@ -48,19 +48,12 @@ const getLibraryQuery = gql`
 
 `
 const getLibraryByUserQuery = gql`
-    query GetLibraryByUser($userId: ID){
-        libraryUser(userId: $userId){
-            id
-            name
-            address
-            membershipFee
-            books{
-                name
+    query GetLibraryByUser($id: ID){
+        user(id: $id){
+            library{
                 id
-                authorName
-            }
-            User{
-                email
+                name
+                address
             }
         }
     }
@@ -97,7 +90,7 @@ const getAuthorNQuery = gql`
 
 
 const addLibraryMutation = gql`
-    mutation AddLibrary($name: String!, $address: String!, $membershipFee: String!, $userId: ID){
+    mutation AddLibrary($name: String!, $address: String!, $membershipFee: String!, $userId: ID!){
         addLibrary(name: $name, address: $address, membershipFee: $membershipFee, userId: $userId){
             name
             id

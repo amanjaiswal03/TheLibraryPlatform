@@ -5,6 +5,7 @@ const librarySchema = new Schema({
     name: String,
     address: String,
     membershipFee: String,
+    userId: String,
     houseRules: String,
     additionalFeaturs: String,
     reviews: String

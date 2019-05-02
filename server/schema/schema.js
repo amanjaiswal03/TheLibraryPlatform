@@ -97,11 +97,11 @@ const RootQuery = new GraphQLObjectType({
                 return Library.findById(args.id);
             }
         },
-        libraryUser: {
-            type: LibraryType,
-            args: { userId: { type: GraphQLID } },
+        user: {
+            type: UserType,
+            args: { id: { type: GraphQLID } },
             resolve(parents, args) {
-                return Library.find({userId: args.userId});
+                return User.findById(args.id);
             }
         },
         book: {
@@ -170,6 +170,7 @@ const Mutation = new GraphQLObjectType({
                 let library = new Library({
                     name: args.name,
                     address: args.address,
+                    userId: args.userId,
                     membershipFee: args.membershipFee,
                     houseRules: args.houseRules,
                     additionalFeaturs: args.additionalFeatures,

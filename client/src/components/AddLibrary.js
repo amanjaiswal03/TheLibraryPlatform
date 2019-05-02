@@ -15,22 +15,15 @@ class AddLibrary extends Component {
             userId: ''
         };
     }
-    componentDidMount () {
-        const token = localStorage.usertoken
-        const decoded = jwt_decode(token)
-        console.log(decoded);
-        this.setState({
-            userId: decoded.id
-        })
-    }
     submitForm(e){
         e.preventDefault();
+        console.log((jwt_decode(localStorage.usertoken))._id)
         this.props.addLibraryMutation({
             variables: {
                 name: this.state.name,
                 address: this.state.address,
                 membershipFee: this.state.membershipFee,
-                userId: this.state.userId
+                userId: (jwt_decode(localStorage.usertoken))._id
             },
             refetchQueries: [{ query: getLibrariesQuery }]
         })
