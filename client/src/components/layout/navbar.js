@@ -1,8 +1,4 @@
 import React, {Component} from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import { Link, withRouter } from 'react-router-dom';
 
 
@@ -17,35 +13,23 @@ class NavBar extends Component {
   
   render(){
     const loginRegLink = (
-      <div>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" color="inherit" >
-          <Link to = '/' className = "link">The Library Platform </Link>
-          </Typography>
-          <Button color="inherit">About</Button>
-          <Button color="inherit"><Link to = '/addLibrary' className = "link">Create your library</Link></Button>
-          <Button color="inherit"><Link to = '/register' className = "link">Register</Link></Button>
-          <Button color="inherit"><Link to = '/login' className = "link">Log In</Link></Button>
-        </Toolbar>
-      </AppBar>
-    </div>
+      <div className = "header">
+          <Link to = '/' className = "link title">The Library Platform </Link>
+          <Link to = '/' className = "link about">About</Link>
+          <Link to = '/addLibrary' className = "link create">Create your library</Link>
+          <Link to = '/register' className = "link register">Register</Link>
+          <Link to='/login' className="link login">Log In</Link>
+      </div>
     )
     const userLink = (
-      <div>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" color="inherit" >
-          <Link to = '/' className = "link">The Library Platform </Link>
-          </Typography>
-          <Button color="inherit">About</Button>
-          <Button color="inherit"><Link to = '/addLibrary' className = "link">Create your library</Link></Button>
-          <Button color="inherit"><Link to = '/dashboard' className = "link">Your Library</Link></Button>
-          <Button color="inherit"><Link to = '/profile' className = "link">Profile</Link></Button>
-          <Button color="inherit" onClick={this.logOut.bind(this)}>Logout</Button>
-        </Toolbar>
-      </AppBar>
-    </div>
+      <div className = "header">
+          <Link to = '/' className = "link title">The Library Platform </Link>
+          <Link to = '/' className = "about">About</Link>
+          <Link to = '/addLibrary' className = "link create">Create your library</Link>
+          <Link to = '/dashboard' className = "link dash">Your Library</Link>
+          <Link to = '/profile' className = "link profile">Profile</Link>
+          <button className = "logout" onClick={this.logOut.bind(this)}>Logout</button>
+      </div>
     )
 
     return (

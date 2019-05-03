@@ -36,14 +36,14 @@ class Homepage extends Component {
       <div className = "homepage">
         <form onSubmit = {this.submitForm.bind(this)}>
           {this.renderRedirect()}
-          <Paper className= "root" elevation={1}>
+          <div className= "search-box" elevation={1}>
               <InputBase className="input" placeholder="Search for books near you.." onChange = {(e)=> {this.setState({search: e.target.value})}} required/>
-              <IconButton className= "iconButton" aria-label="Search">
-              <Link to = {"search/" + this.state.search}><SearchIcon /></Link>
+              <IconButton className= "iconButton">
+                <Link to = {"search/" + this.state.search} className = "linkicon"><SearchIcon /></Link>
               </IconButton>
-          </Paper>
+          </div>
         </form>
-        <Link to = "libraries" className = "link"><Button className = "alllib"> All libraries Near you </Button></Link>
+        <Button className = "alllib"> <Link to = "libraries" className = "link">All libraries Near you </Link></Button>
       </div>
     );
   }

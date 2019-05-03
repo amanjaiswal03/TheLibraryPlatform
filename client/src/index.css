@@ -1,72 +1,84 @@
 /* entire content */
 
 body {
-  background: #eee;
+  background: #89ADAF;
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Rubik;
+  font-style: normal;
 }
 .link {
   text-decoration: none;
-  color: white;
+  color: #D2A784;
 }
+
+.linkicon {
+  text-decoration: none;
+  color: #1A2C58;
+}
+
+/* navbar */
+
+.header{
+  position: absolute;
+  width: 100%;
+  height: 80px;
+  left: 0px;
+  top: 0px;
+  background: #1A2C58;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 28px;
+}
+
+.title{
+  font-weight: bold;
+}
+
+
 
 /* homepage decoration */
 .homepage {
-  height: 60vh;
+  height: 80vh;
   margin-top: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.homepage .alllib {
-  margin-top: 20px;
-}
-.root {
-  padding: 2px 40px;
-  display: flex;
-  align-items: center;
-  width: 900px ;
-  height: 60px;
-}
-.input{
-  margin-left: 8;
-  flex: 1;
-}
-.iconButton{
-  padding: 10
-}
-/* navbar */
 
-div.navbar {
+.search-box {
+  background-color: white;
+  border-radius: 10px;
+  width: 600px;
   display: flex;
   justify-content: space-around;
 }
 
-ul.right {
-  list-style: none;
-  display: flex;
-  flex-direction: row;
+.input{
+  padding-left: 20px;
+  flex: 1;
 }
 
-ul.right li {
-  padding: 20px;
-  text-decoration: none;
-  color: none;
+Button.alllib{
+  margin-top: 30px;
+  background-color: #1A2C58;
 }
 
-Button.alllib {
-  background-color:#3F51B5 !important;
-  color: White;
+Button.alllib:hover{
+  background-color: #1A2C58 
 }
 
-Button.search {
-  margin-top: 10px;
-  background-color:#3F51B5 !important;
-  color: White;
-  display: flex;
-  justify-content: center;
+.iconbutton{
+  color: #1A2C58
 }
+
+
+
+
+
+
+
 
 ul.libraries-list {
   display: flex;
