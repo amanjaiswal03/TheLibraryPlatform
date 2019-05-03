@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {graphql, compose } from 'react-apollo';
-import { addLibraryMutation,getLibrariesQuery} from '../queries/queries';
-import {Redirect} from 'react-router-dom'
+import { addLibraryMutation,getLibrariesQuery, getLibraryByUserQuery} from '../queries/queries';
+import {Redirect, Link} from 'react-router-dom'
 
 import jwt_decode from 'jwt-decode'
 
@@ -25,8 +25,9 @@ class AddLibrary extends Component {
                 membershipFee: this.state.membershipFee,
                 userId: (jwt_decode(localStorage.usertoken))._id
             },
-            refetchQueries: [{ query: getLibrariesQuery }]
-        })
+            refetchQueries: [{ query: getLibrariesQuery, getLibraryByUserQuery }]
+        });
+        this.props.history.push(`/dashboard`)
     }
     render(){
         if(!localStorage.usertoken) return <Redirect to = '/login' />
@@ -44,7 +45,7 @@ class AddLibrary extends Component {
                     <label>MembershipFee:</label>
                     <input type = "Number" onChange = {(e)=> {this.setState({membershipFee: e.target.value})}} required></input>
                 </div>
-                <button> Create library </button>
+                <button > Create library </button>
             </form>
         )
     }

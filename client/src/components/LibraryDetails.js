@@ -19,7 +19,7 @@ class LibraryDetails extends Component{
                             this.props.removeBookMutation({variables:{id: book.id, librariesId: this.props.match.params.id}, refetchQueries: [{ query: getBooksQuery }]}); 
                             this.props.getLibraryQuery.refetch() 
                         }
-                    }> Remove Book </button>
+                    }> Remove </button>
                 )
             }
             else{
