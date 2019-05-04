@@ -3,7 +3,8 @@ const graphqlHTTP = require('express-graphql');
 const schema = require('./schema/schema');
 const mongoose = require('mongoose');
 const cors = require('cors');
-var bodyParser = require("body-parser")
+var bodyParser = require("body-parser");
+var keys = require('./keys.js')
 
 const app = express();
 
@@ -20,7 +21,7 @@ var Users = require('./routes/Users')
 
 app.use('/users', Users)
 
-mongoose.connect("mongodb://test:test123@ds149914.mlab.com:49914/library-platform", { useNewUrlParser: true });
+mongoose.connect(keys.mongodb.dbURI, { useNewUrlParser: true });
 mongoose.connection.once('open', () => {
     console.log('connected to the database');
 })

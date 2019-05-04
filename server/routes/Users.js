@@ -7,19 +7,9 @@ const bcrypt = require("bcrypt")
 const User = require("../models/User")
 users.use(cors())
 
-// Load input validation
-const validateRegisterInput = require("../validation/register");
-const validateLoginInput = require("../validation/login");
-
 process.env.SECRET_KEY = 'secret'
 
 users.post('/register', (req, res) => {
-
-    const { errors, isValid } = validateRegisterInput(req.body);
-    // Check validation
-    if (!isValid) {
-        return res.json(errors);
-    }
 
     User.findOne({ email: req.body.email }).then(user => {
         if (user) {
@@ -49,13 +39,8 @@ users.post('/register', (req, res) => {
 
 users.post('/login', (req, res) => {
 
-    const { errors, isValid } = validateLoginInput(req.body);
-    // Check validation
-    if (!isValid) {
-        return res.json(errors);
-    }
     const email = req.body.email;
-  const password = req.body.password;
+    const password = req.body.password;
 // Find user by email
   User.findOne({ email }).then(user => {
     // Check if user exists
@@ -92,23 +77,5 @@ users.post('/login', (req, res) => {
   });
 });
     
-
-users.get('/profile', (req, res) => {
-    var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
-
-    User.findOne({
-        _id: decoded._id
-    })
-        .then(user => {
-            if (user) {
-                return res.json(user)
-            } else {
-                return res.json({ error: "User doesn't exist" });
-            }
-        })
-        .catch(err => {
-            return res.send('error: ' + err)
-        })
-})
 
 module.exports = users
