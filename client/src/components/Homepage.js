@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
+import Input from '@material-ui/core/Input';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 //material component
@@ -36,11 +36,9 @@ class Homepage extends Component {
       <div className = "homepage">
         <form onSubmit = {this.submitForm.bind(this)}>
           {this.renderRedirect()}
-          <div className= "search-box" elevation={1}>
-              <InputBase className="input" placeholder="Search for books near you.." onChange = {(e)=> {this.setState({search: e.target.value})}} required/>
-              <IconButton className= "iconButton">
-                <Link to = {"search/" + this.state.search} className = "linkicon"><SearchIcon /></Link>
-              </IconButton>
+          <div className= "search-box">
+              <input className="search-input" placeholder="Search for books near you.." onChange = {(e)=> {this.setState({search: e.target.value})}} required />
+              <SearchIcon className = "search-icon"/>
           </div>
         </form>
         <Button className = "alllib"> <Link to = "libraries" className = "link">All libraries Near you </Link></Button>
