@@ -3,6 +3,7 @@ import {getLibraryQuery, removeBookMutation, getBooksQuery} from '../queries/que
 import { graphql, compose } from 'react-apollo';
 import { Link } from 'react-router-dom';
 import jwt_decode from 'jwt-decode'
+import Button from '@material-ui/core/Button';
 
 //components
 import AddBook from './AddBook';
@@ -10,16 +11,50 @@ import AddBook from './AddBook';
 
 class LibraryDetails extends Component{
 
+    addBookButton(){
+        if(this.props.getLibraryQuery.library && localStorage.usertoken){
+            if (this.props.getLibraryQuery.library.userId === jwt_decode(localStorage.usertoken)._id)
+            {
+                return (
+                    <Button id = "info" href = "#add-book"> Add Book </Button>
+                )
+            }
+            else{
+                return null;
+            }
+        }
+        else {
+            return null
+        }
+    }
+
+    owner(){
+        if(this.props.getLibraryQuery.library && localStorage.usertoken){
+            if (this.props.getLibraryQuery.library.userId === jwt_decode(localStorage.usertoken)._id)
+            {
+                return (
+                    <div className = "owner"><em> You are the owner of this library </em></div>
+                )
+            }
+            else{
+                return null;
+            }
+        }
+        else {
+            return null
+        }
+    }
+
     removeBook(book){
         if(this.props.getLibraryQuery.library && localStorage.usertoken){
             if (this.props.getLibraryQuery.library.userId === jwt_decode(localStorage.usertoken)._id)
             {
                 return (
-                    <button onClick = {()=> {
+                    <Button className = "info remove" onClick = {()=> {
                             this.props.removeBookMutation({variables:{id: book.id, librariesId: this.props.match.params.id}, refetchQueries: [{ query: getBooksQuery }]}); 
                             this.props.getLibraryQuery.refetch() 
                         }
-                    }> Remove </button>
+                    }> Remove </Button>
                 )
             }
             else{
@@ -51,23 +86,33 @@ class LibraryDetails extends Component{
         const {library} =  this.props.getLibraryQuery;
         if (library){
             return(
-                <div>
-                    <h2>Name: {library.name}</h2>
-                    <p> Address: {library.address}</p>
-                    <p> Membership Fee: {library.membershipFee}</p>
-                    <p> All books in this library: </p>
-                    <ul className = "all-books">
+                <div className = "lib-details">
+                    <div className = "lib-info">
+                        <div><strong>Library Name: </strong> {library.name}</div><br></br>
+                        <div><strong>Address:</strong> {library.address}</div><br></br>
+                        <div><strong>Membership Fee:</strong> {library.membershipFee} $</div>
+                    </div>
+                    <div className = "allbook-lib">
+                        <div><strong><em>All Books:</em> </strong>{this.addBookButton()}</div>
                         {library.books.map(book => {
                             return(
-                                <div key = {book.id}>
-                                    <Link to = {'/book/' + book.id}>
-                                        <li key = {book.id} >{book.name}<br></br> Author: {book.authorName}</li>
+                                <div className = "book-lib">
+                                    <Link to = {'/book/' + book.id} className = "link">
+                                        <div className = "book-detail-lib">
+                                            <div><strong> Book Name: </strong>{book.name}</div>
+                                            <div><strong>Author: </strong>{book.authorName}</div>
+                                        </div>
                                     </Link>
-                                    {this.removeBook(book)}
+                                    <div className = "action-lib">
+                                        <Link to = {'/book/' + book.id} className = "link"><Button className = "info">More Info</Button></Link>
+                                        {this.removeBook(book)}
+                                    </div>
+                                    <hr></hr>
+                                    <br></br>
                                 </div>
                             )
                         })}
-                    </ul>
+                    </div>
                 </div>
             )
         }
@@ -79,6 +124,8 @@ class LibraryDetails extends Component{
         return(
             <div>
                 <div className="library-details">
+                    <div className = "headTitle"> LIBRARY DETAILS </div>
+                    {this.owner()}
                     {this.displayLibraryDetails()}
                 </div>
                 {this.addBook()}

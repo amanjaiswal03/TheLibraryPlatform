@@ -25,6 +25,7 @@ const getLibrariesQuery = gql`
             name
             id
             address
+            membershipFee
         }
     }
 `
@@ -55,6 +56,7 @@ const getLibraryByUserQuery = gql`
                 id
                 name
                 address
+                membershipFee
             }
         }
     }

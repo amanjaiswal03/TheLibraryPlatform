@@ -18,25 +18,34 @@ class BookDetails extends Component{
         console.log(book);
         if (book){
             return(
-                <div>
-                    <h2>Name: {book.name}</h2>
-                    <p> Genre: {book.genre}</p>
-                    <p> Author: {book.authorName}</p>
-                    <div> <h2>Available in: </h2> {
-                        book.library.map((library) => {
-                            return (<Link to = {'/library/' + library.id} key={library.id}>
-                            <Card id = "liblist">
-                                <CardContent>
-                                    <Typography variant="h5" component="h2">{library.name} </Typography> 
-                                    <Typography component="p"> Address: {library.address}  </Typography>
-                                </CardContent>
-                                <CardActions>
-                                    <Button size="small">Details</Button>
-                                </CardActions>
-                            </Card>
-                        </Link>)}
-                        )
-                    } </div>
+                <div className = "book-details">
+                    <div className = "book-info">
+                        <div><strong>Book Name: </strong> {book.name}</div><br></br>
+                        <div><strong>Genre:</strong> {book.genre}</div><br></br>
+                        <div><strong>Author:</strong> {book.authorName}</div>
+                    </div>
+                    <div className = "alllib-book"> 
+                        <div><strong><em>Available in: </em></strong></div><br></br> {
+                            book.library.map((library) => {
+                                return (
+                                <div className = "lib-book">
+                                    <Link to = {'/library/' + library.id} key={library.id} className = "link">
+                                    <div className = "lib-detail-book">
+                                        <div><strong> Library Name: </strong>{library.name}</div><br></br>
+                                        <div><strong>Address: </strong>{library.address}</div>
+                                    </div>
+                                    </Link>
+                                    <div className = "action-book">
+                                        <Link to = {'/library/' + library.id} key={library.id} className = "link"><Button className = "info">More Info</Button></Link>
+                                    </div>
+                                    <hr></hr>
+                                </div>
+                                
+                                )}
+                            )
+                        } 
+                    </div>
+                    <br></br>
                 </div>
             )
         }
@@ -48,8 +57,11 @@ class BookDetails extends Component{
     }
     render(){
         return(
+            <div>
+            <div className = "headTitle"> BOOK DETAILS </div>
             <div className="book-details">
                 {this.displayBookDetails()}
+            </div>
             </div>
         )
     }

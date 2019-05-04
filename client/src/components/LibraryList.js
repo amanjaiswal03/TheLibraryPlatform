@@ -4,11 +4,6 @@ import { graphql } from 'react-apollo';
 
 import {Link} from 'react-router-dom';
 
-//material - ui component
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
 
@@ -16,24 +11,25 @@ class LibraryList extends Component{
     displayLibraries(){
         var data = this.props.data;
         if(data.loading){
-            return (<div> Loading libraries... </div>);
+            return (<div className = "result"> Loading libraries... </div>);
         }
         else if (data.libraries.length === 0){
-            return (<div> No Libraries </div>)
+            return (<div className = "result"> No Libraries </div>)
         } 
         else{
             return data.libraries.map(library => {
                 return(
-                    <Link to = {'/library/' + library.id} key={library.id}>
-                        <Card id = "liblist">
-                            <CardContent>
-                                <Typography variant="h5" component="h2">{library.name} </Typography> 
-                                <Typography component="p"> Address: {library.address}  </Typography>
-                            </CardContent>
-                            <CardActions>
-                                <Button size="small">Details</Button>
-                            </CardActions>
-                        </Card>
+                    <Link to = {'/library/' + library.id} key={library.id} className = "link">
+                        <div className = "result">
+                            <div className = "content">
+                                <div><strong>Library Name: </strong> {library.name}</div><br></br>
+                                <div><strong>Address:</strong> {library.address}</div><br></br>
+                                <div><strong>Membership Fee:</strong> {library.membershipFee}$</div>
+                            </div>
+                            <div className = "action">
+                                <Button className = "info">More Info</Button>
+                            </div>
+                        </div>
                     </Link>
                 );
             })

@@ -53,16 +53,18 @@ class SearchResult extends Component{
             else{
                 return filtered.map(book => {
                         return(
-                                <Link to = {'/book/' + book.id} key={book.id}>
-                                    <Card id = "booklist">
-                                        <CardContent>
-                                            <Typography variant="h5" component="h2">{book.name} </Typography> 
-                                            <Typography component="p"> Genre: {book.genre}  </Typography>
-                                        </CardContent>
-                                        <CardActions>
-                                            <Button size="small">Details</Button>
-                                        </CardActions>
-                                    </Card>
+                                <Link to = {'/book/' + book.id} key={book.id} className = "link">
+                                    <div className = "result">
+                                        <div className = "content">
+                                            <div><strong>Book Name: </strong> {book.name}</div><br></br>
+                                            <div><strong>Genre:</strong> {book.genre}</div><br></br>
+                                            <div><strong>Author:</strong> {book.authorName}</div>
+                                        </div>
+                                        <div className = "action">
+                                            <Button className = "info">More Info</Button>
+                                        </div>
+
+                                    </div>
                                 </Link>
                         )
                     }
@@ -72,14 +74,12 @@ class SearchResult extends Component{
     }
     render(){
         return(
-            <div>
+            <div id = "search-result">
             <form onSubmit = {this.submitForm.bind(this)}>
-                <Paper className= "root" elevation={1}>
-                    <InputBase className="input" placeholder="Search for books ..." onChange = {(e)=> {this.setState({temp: e.target.value})}} />
-                    <IconButton className= "iconButton" aria-label="Search">
-                    <Link to = {"search/" + this.state.search}><SearchIcon /></Link>
-                    </IconButton>
-                </Paper>
+            <div className= "search-box">
+              <input id = "search-input" className="search-input" placeholder="Search for books near you.." onChange = {(e)=> {this.setState({search: e.target.value})}} required />
+              <SearchIcon className = "search-icon"/>
+            </div>    
             </form>
             <div className="results">
                 {this.displayResult()}

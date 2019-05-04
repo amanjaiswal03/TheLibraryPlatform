@@ -3,12 +3,6 @@ import {getLibraryByUserQuery} from '../queries/queries';
 import { graphql, compose } from 'react-apollo';
 import jwt_decode from 'jwt-decode'
 import {Link, Redirect} from 'react-router-dom';
-
-//material - ui component
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
 class Dashboard extends Component{
@@ -23,16 +17,17 @@ class Dashboard extends Component{
         } else{
             return data.user.library.map(library => {
                 return(
-                    <Link to = {'/library/' + library.id} key={library.id}>
-                        <Card id = "liblist">
-                            <CardContent>
-                                <Typography variant="h5" component="h2">{library.name} </Typography> 
-                                <Typography component="p"> Address: {library.address}  </Typography>
-                            </CardContent>
-                            <CardActions>
-                                <Button size="small">Details</Button>
-                            </CardActions>
-                        </Card>
+                    <Link to = {'/library/' + library.id} key={library.id} className = "link">
+                        <div className = "result">
+                            <div className = "content">
+                                <div><strong>Library Name: </strong> {library.name}</div><br></br>
+                                <div><strong>Address:</strong> {library.address}</div><br></br>
+                                <div><strong>Membership Fee:</strong> {library.membershipFee}$</div>
+                            </div>
+                            <div className = "action">
+                                <Button className = "info">More Info</Button>
+                            </div>
+                        </div>
                     </Link>
                 );
             })
@@ -42,7 +37,7 @@ class Dashboard extends Component{
         if(!localStorage.usertoken) return <Redirect to = '/login' />
         return (
             <div>
-                <Link to = {'/addLibrary'} className = "link"><Button> Add a new library </Button></Link>
+                <Link to = {'/addLibrary'} className = "link"><Button className = "alllib add"> Add a new library </Button></Link>
                 <ul className="libraries-list">
                     { this.displayLibraries() }
                 </ul>

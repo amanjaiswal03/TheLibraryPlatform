@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {graphql, compose } from 'react-apollo';
 import { addBookMutation, addAuthorMutation, getBooksQuery} from '../queries/queries';
-
+import Button from '@material-ui/core/Button';
 
 
 
@@ -37,22 +37,24 @@ class AddBook extends Component {
     }
     render(){
         return(
-            <form id = "add-book" onSubmit = {this.submitForm.bind(this)}>
-                <h3> Add Book To This Library</h3>
+            <div id = "add-book">
+            <div className = "create-title"> ADD MORE BOOK </div>
+            <form id = "add-book-form" onSubmit = {this.submitForm.bind(this)}>
                 <div className="field">
-                    <label>Book Name:</label>
-                    <input type = "text" onChange = {(e)=> {this.setState({name: e.target.value})}} required></input>
+                    <label className = "liblabel">Book Name:</label>
+                    <input className = "libfield" type = "text" onChange = {(e)=> {this.setState({name: e.target.value})}} required></input>
                 </div>
                 <div className="field">
-                    <label>Genre:</label>
-                    <input type = "text" onChange = {(e)=> {this.setState({genre: e.target.value})}} required></input>
+                    <label  className = "liblabel" >Genre:</label><br></br>
+                    <input  className = "libfield" type = "text" onChange = {(e)=> {this.setState({genre: e.target.value})}} required></input>
                 </div>
                 <div className="field">
-                    <label>Author Name:</label>
-                    <input type = "text" onChange = {(e)=> {this.setState({authorName: e.target.value})}} required></input>
+                    <label className = "liblabel">Author Name:</label>
+                    <input  className = "libfield" type = "text" onChange = {(e)=> {this.setState({authorName: e.target.value})}} required></input>
                 </div>
-                <button> Add book </button>
+                <Button className = "alllib" type = "submit">Add Book</Button>
             </form>
+            </div>
         )
     }
 }
