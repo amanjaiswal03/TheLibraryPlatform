@@ -295,6 +295,26 @@ Button.add{
   color: #1A2C58;
 }
 
+/* Profile */
+
+.profilepage{
+  margin: 0 60px;
+  font-size: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  color:#1A2C58;
+  padding: 20px;
+}
+
+.header-title{
+  font-size: 28px;
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+}
+
 
 
 
