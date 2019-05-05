@@ -46,7 +46,7 @@ class AddLibrary extends Component {
                     </div>
                     <div className="field">
                         <label className = "liblabel">Membership Fee:</label>
-                        <input className= "libfield-mem" type = "Number" onChange = {(e)=> {this.setState({membershipFee: e.target.value})}} required></input>
+                        <input className= "libfield-mem" type = "Number" onChange = {(e)=> {this.setState({membershipFee: e.target.value})}} required></input><span id = "currency"> $</span>
                     </div>
                     <Button className = "alllib" type = "submit">Create library</Button>
                 </form>

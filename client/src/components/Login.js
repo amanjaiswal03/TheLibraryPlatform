@@ -28,7 +28,7 @@ class Login extends Component {
         }
 
         login(user).then((res) => {
-            //console.log(res)
+            console.log(res)
             if (res.data.error) {
                 this.setState({errors: res.data.error})
             }
@@ -46,9 +46,10 @@ class Login extends Component {
         <div id = "login">
         <div className = "create-title"> LOGIN </div>
         <div className="red-text center">
-                {this.state.errors ? <p> {this.state.errors} </p> : null }
+                <div>{this.state.errors && this.state.errors.email ? <p> {this.state.errors.email} </p> : null }</div>
+                <div>{this.state.errors && this.state.errors.password ? <p> {this.state.errors.password} </p> : null }</div>
         </div>
-        <form id = "login-form" onSubmit={this.onSubmit}>
+        <form noValidate id = "login-form" onSubmit={this.onSubmit}>
           <div className = "field">
             <label className = "liblabel" htmlFor="email">Email</label><br></br>
             <input
@@ -57,8 +58,6 @@ class Login extends Component {
               value={this.state.email}
               id="email"
               type="email"
-              pattern = ".+@.*.com"
-              required
             />
           </div>
           <div className = "field">
@@ -69,8 +68,6 @@ class Login extends Component {
               value={this.state.password}
               id="password"
               type="password"
-              minLength= "6"
-              required
             />
           </div>
           <Button className = "alllib" type = "submit">Login</Button>

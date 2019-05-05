@@ -7,13 +7,28 @@ const bcrypt = require("bcrypt")
 const User = require("../models/User")
 users.use(cors())
 
+// Load input validation
+const validateRegisterInput = require("../Validator/register");
+const validateLoginInput = require("../Validator/login");
+
 process.env.SECRET_KEY = 'secret'
+
+
 
 users.post('/register', (req, res) => {
 
     User.findOne({ email: req.body.email }).then(user => {
+        //form validation
+        const { errors, isValid } = validateRegisterInput(req.body);
+
+        // Check validation
+      if (!isValid) {
+        return res.json({error: errors});
+      }
+
         if (user) {
-            return res.json({ error: "Email already exists" });
+            errors.email = "Email already exists"
+            return res.json({ error: errors });
         } 
         const today = new Date()
         const newUser = new User({
@@ -38,6 +53,13 @@ users.post('/register', (req, res) => {
 });
 
 users.post('/login', (req, res) => {
+    //form validation
+    const { errors, isValid } = validateLoginInput(req.body);
+
+    // Check validation
+  if (!isValid) {
+    return res.json({error: errors});
+  }
 
     const email = req.body.email;
     const password = req.body.password;
@@ -45,7 +67,10 @@ users.post('/login', (req, res) => {
   User.findOne({ email }).then(user => {
     // Check if user exists
     if (!user) {
-      return res.json({ error: "Email not found" });
+      errors.email = "Email not found";
+      errors.password = null
+      console.log(res)
+      return res.json({ error: errors });
     }
 // Check password
     bcrypt.compare(password, user.password).then(isMatch => {
@@ -70,8 +95,9 @@ users.post('/login', (req, res) => {
           }
         );
       } else {
-        return res
-          .json({ error: "Password incorrect" });
+          errors.email = null;
+          errors.password = "Password Incorrect"
+          return res.json({ error: errors});
       }
     });
   });

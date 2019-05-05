@@ -33,7 +33,8 @@ class Register extends Component {
 
         register(user).then(res => {
             if (res.data.error) {
-                this.setState({errors: res.data.error})
+                this.setState({errors: res.data.error});
+                document.documentElement.scrollTop = 0;
             }
             else {
                 window.alert("Successfully registered")
@@ -49,9 +50,12 @@ class Register extends Component {
         <div id = "register">
           <div className = "create-title"> REGISTER </div>
           <div className="red-text center">
-                  {this.state.errors ? <p> {this.state.errors} </p> : null }
+            <div>{this.state.errors && this.state.errors.first_name ? <p> {this.state.errors.first_name} </p> : null }</div>
+            <div>{this.state.errors && this.state.errors.last_name ? <p> {this.state.errors.last_name} </p> : null }</div>
+            <div>{this.state.errors && this.state.errors.email ? <p> {this.state.errors.email} </p> : null }</div>
+            <div>{this.state.errors && this.state.errors.password ? <p> {this.state.errors.password} </p> : null }</div>
           </div>
-          <form id = "register-form" onSubmit={this.onSubmit}>
+          <form noValidate id = "register-form" onSubmit={this.onSubmit}>
             <div className = "field">
               <label className = "liblabel" htmlFor="first name"> First name</label>
               <input
@@ -60,7 +64,6 @@ class Register extends Component {
                 value={this.state.first_name}
                 id="first_name"
                 type="text"
-                required
               />
             </div> 
             <div className = "field">
@@ -71,7 +74,6 @@ class Register extends Component {
                 value={this.state.last_name}
                 id="last_name"
                 type="text"
-                required
               />
             </div> 
             <div className = "field">
@@ -82,8 +84,6 @@ class Register extends Component {
                 value={this.state.email}
                 id="email"
                 type="email"
-                pattern = ".+@.*.com"
-                required
               />
             </div>
             <div className = "field">
@@ -94,8 +94,6 @@ class Register extends Component {
                 value={this.state.password}
                 id="password"
                 type="password"
-                minLength= "6"
-                required
               />
             </div>
             <Button className = "alllib" type = "submit">Register</Button>

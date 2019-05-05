@@ -169,7 +169,7 @@ input.libfield-mem:focus{
 
 .red-text{
   color: red;
-  font-size: 36px;
+  font-size: 28px;
 }
 
 #login{
@@ -237,7 +237,7 @@ Button.info{
 
 .lib-details, .book-details{
   background-color: white;
-  overflow-y: scroll;
+  overflow-y: hidden;
   display: flex;
   height: 70vh;
   width: 90%;
@@ -254,8 +254,11 @@ Button.info{
 
 .allbook-lib, .alllib-book{
   margin-left: 300px;
+  padding-right: 60px;
+  padding-bottom: 20px;
   font-size: 28px;
   color:#1A2C58;
+  overflow-y: scroll;
 }
 
 .book-detail-lib, .lib-detail-book{
@@ -298,7 +301,7 @@ Button.add{
 /* Profile */
 
 .profilepage{
-  margin: 0 60px;
+  margin: 0 300px;
   font-size: 28px;
   display: flex;
   flex-direction: column;
@@ -313,6 +316,12 @@ Button.add{
   margin: 20px;
   display: flex;
   justify-content: center;
+  color: #1A2C58;
+}
+
+#currency{
+  font-size: 28px;
+  color: #1A2C58;
 }
 
 
