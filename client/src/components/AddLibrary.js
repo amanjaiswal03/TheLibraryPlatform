@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {graphql, compose } from 'react-apollo';
 import { addLibraryMutation,getLibrariesQuery, getLibraryByUserQuery} from '../queries/queries';
-import {Redirect, Link} from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
 
 import jwt_decode from 'jwt-decode'
@@ -26,9 +26,11 @@ class AddLibrary extends Component {
                 membershipFee: this.state.membershipFee,
                 userId: (jwt_decode(localStorage.usertoken))._id
             },
-            refetchQueries: [{ query: getLibrariesQuery, getLibraryByUserQuery }]
+            refetchQueries: [{ query: getLibrariesQuery, getLibraryByUserQuery}]
         });
-        this.props.history.push(`/dashboard`)
+        localStorage.setItem('newLibrary', "newLibrary")
+        this.props.history.push(`/dashboard`);
+        
     }
     render(){
         if(!localStorage.usertoken) return <Redirect to = '/login' />

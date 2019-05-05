@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {graphql, compose } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import { addBookMutation, addAuthorMutation, getBooksQuery} from '../queries/queries';
 import Button from '@material-ui/core/Button';
 
@@ -16,6 +16,7 @@ class AddBook extends Component {
         };
     };
     submitForm(e){
+        e.preventDefault();
         console.log(this.props);
         this.props.addAuthorMutation({
             variables: {
@@ -31,7 +32,10 @@ class AddBook extends Component {
             },
             refetchQueries: [{ query: getBooksQuery }]
         });
-        this.props.fetch.refetch();
+        this.props.getLibraryQuery.refetch();
+        document.getElementById("add-book-form").reset();
+        document.documentElement.scrollTop = 0;
+        window.alert("book successfully added");
 
     }
     render(){

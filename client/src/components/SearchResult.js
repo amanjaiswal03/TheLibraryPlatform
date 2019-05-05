@@ -3,17 +3,7 @@ import {getLibrariesQuery, getBooksQuery} from '../queries/queries';
 import { graphql, compose } from 'react-apollo';
 
 import {Link} from 'react-router-dom';
-
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
-import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
-
-//material - ui component
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
 class SearchResult extends Component{

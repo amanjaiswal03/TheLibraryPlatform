@@ -1,7 +1,4 @@
 import React, {Component} from 'react';
-import Paper from '@material-ui/core/Paper';
-import Input from '@material-ui/core/Input';
-import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 //material component
 import Button from '@material-ui/core/Button';

@@ -136,7 +136,23 @@ const removeBookMutation = gql `
     }
 `
 
+const removeLibraryMutation = gql `
+    mutation RemoveLibrary($id: ID!){
+        removeLibrary(id: $id){
+            id
+        }
+    }
+`
+
+const removeBooksInLibraryMutation = gql `
+    mutation RemoveBooksInLibrary($id: ID!){
+        removeBooksInLibrary(id: $id){
+            id
+        }
+    }
+`
 
 
 
-export {  addAuthorMutation, removeBookMutation, getAuthorsQuery,  getLibrariesQuery,getBooksQuery, getLibraryQuery, getBookQuery,getAuthorNQuery,getLibraryByUserQuery, addLibraryMutation, addBookMutation} ;
+
+export {  addAuthorMutation, removeBookMutation, removeBooksInLibraryMutation, removeLibraryMutation, getAuthorsQuery,  getLibrariesQuery,getBooksQuery, getLibraryQuery, getBookQuery,getAuthorNQuery,getLibraryByUserQuery, addLibraryMutation, addBookMutation} ;

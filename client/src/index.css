@@ -75,7 +75,7 @@ Button.alllib{
   font-size: 22px;
   font-family: Rubik;
   font-style: normal;
-  text-transform:capitalize; 
+  text-transform:capitalize;
 }
 
 Button.alllib:hover{
@@ -325,10 +325,10 @@ Button.add{
 }
 
 
-
-
-
-
+/* Dashboard */
+#removeLibBtn{
+  margin-left: 20px;
+}
 
 
 

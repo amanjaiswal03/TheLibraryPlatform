@@ -1,14 +1,7 @@
 import React, {Component} from 'react';
 import {getBookQuery} from '../queries/queries';
 import {graphql} from 'react-apollo';
-
 import {Link} from 'react-router-dom';
-
-//material - ui component
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
 class BookDetails extends Component{
@@ -28,7 +21,7 @@ class BookDetails extends Component{
                         <div><strong><em>Available in: </em></strong></div><br></br> {
                             book.library.map((library) => {
                                 return (
-                                <div className = "lib-book">
+                                <div className = "lib-book" key = {library.id}>
                                     <Link to = {'/library/' + library.id} key={library.id} className = "link">
                                     <div className = "lib-detail-book">
                                         <div><strong> Library Name: </strong>{library.name}</div><br></br>

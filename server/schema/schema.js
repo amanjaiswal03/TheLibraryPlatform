@@ -4,7 +4,7 @@ const Book = require('../models/book');
 const Author = require('../models/author');
 const User = require('../models/User')
 
-const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLInt, GraphQLSchema, GraphQLList, GraphQLFloat, GraphQLNonNull } = graphql;
+const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLSchema, GraphQLList, GraphQLFloat, GraphQLNonNull } = graphql;
 
 
 const BookType = new GraphQLObjectType({
@@ -117,19 +117,6 @@ const RootQuery = new GraphQLObjectType({
             resolve(parents, args) {
                 return Author.findById(args.id);
             }
-        },
-        authorN: {
-            type: AuthorType,
-            args: {name: {type: GraphQLString}},
-            resolve(parents, args) {
-                // try{
-                //     return  Author.findOne({name: args.name});
-                // } catch(err){
-                //     return err;
-                // }
-                return Author.findOne({name: args.name});
-            }
-        
         },
         libraries: {
             type: new GraphQLList(LibraryType),
@@ -255,6 +242,42 @@ const Mutation = new GraphQLObjectType({
                             return doc.save();
                         }
                         
+                    }
+                }))
+            }
+        },
+        removeLibrary: {
+            type: LibraryType,
+            args: {
+                id: {type: new GraphQLNonNull(GraphQLID)},
+            },
+            resolve(parent, args){
+                return (Library.findByIdAndDelete(args.id))
+            }
+        },
+        removeBooksInLibrary: {
+            type: BookType,
+            args: {
+                id: {type: new GraphQLNonNull(GraphQLID)}
+            },
+            resolve(parent, args){
+                return (Book.find({librariesId: args.id}, function(err, doc){
+                    console.log(doc);
+                    if (err){
+                        return err
+                    }
+                    else{
+                        for(var i = 0; i < doc.length; i++){
+                            doc[i].librariesId.splice(doc[i].librariesId.indexOf(args.id), 1);
+                            if (doc[i].librariesId.length === 0)
+                            {
+                                doc[i].delete();
+                            }
+                            else {
+                                doc[i].save();
+                            }
+                        } 
+                        return 
                     }
                 }))
             }

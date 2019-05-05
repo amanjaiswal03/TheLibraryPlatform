@@ -27,7 +27,7 @@ class Profile extends Component {
         if(!localStorage.usertoken) {return <Redirect to = '/' />}
         return (
             <div>
-            <div class = "header-title"> Your Profile </div>
+            <div className = "header-title"> Your Profile </div>
             <div className = "profilepage">
                 <div><strong>First Name:</strong> {this.state.first_name} </div><br></br>
                 <div><strong>Last Name:</strong> {this.state.last_name} </div><br></br>

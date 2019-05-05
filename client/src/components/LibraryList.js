@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {getLibrariesQuery} from '../queries/queries';
 import { graphql } from 'react-apollo';
 
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
 

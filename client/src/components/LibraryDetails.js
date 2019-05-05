@@ -70,7 +70,7 @@ class LibraryDetails extends Component{
         if(this.props.getLibraryQuery.library && localStorage.usertoken){
             console.log(this.props.getLibraryQuery.library);
             if (this.props.getLibraryQuery.library.userId === jwt_decode(localStorage.usertoken)._id){
-                return <AddBook libraryId = {this.props.match.params.id} fetch = {this.props.getLibraryQuery}/>
+                return <AddBook libraryId = {this.props.match.params.id} getLibraryQuery = {this.props.getLibraryQuery}/>
             }
             else {
                 return null
@@ -96,7 +96,7 @@ class LibraryDetails extends Component{
                         <div><strong><em>All Books:</em> </strong>{this.addBookButton()}</div>
                         {library.books.map(book => {
                             return(
-                                <div className = "book-lib">
+                                <div className = "book-lib" key = {book.id}>
                                     <Link to = {'/book/' + book.id} className = "link">
                                         <div className = "book-detail-lib">
                                             <div><strong> Book Name: </strong>{book.name}</div>
