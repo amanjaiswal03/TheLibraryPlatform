@@ -23,22 +23,22 @@ class BookDetails extends Component{
                                 return (
                                 <div className = "lib-book" key = {library.id}>
                                     <Link to = {'/library/' + library.id} key={library.id} className = "link">
-                                    <div className = "lib-detail-book">
-                                        <div><strong> Library Name: </strong>{library.name}</div><br></br>
-                                        <div><strong>Address: </strong>{library.address}</div>
-                                    </div>
+                                        <div className = "lib-detail-book">
+                                            <div><strong> Library Name: </strong>{library.name}</div>
+                                            <div><strong>Address: </strong>{library.address}</div>
+                                        </div>
                                     </Link>
                                     <div className = "action-book">
                                         <Link to = {'/library/' + library.id} key={library.id} className = "link"><Button className = "info">More Info</Button></Link>
                                     </div>
                                     <hr></hr>
+                                    <br></br>
                                 </div>
                                 
                                 )}
                             )
                         } 
                     </div>
-                    <br></br>
                 </div>
             )
         }
