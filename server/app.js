@@ -12,6 +12,7 @@ app.use(bodyParser.json())
 
 // allow cross origin requests
 app.use(cors());
+
 app.use(
     bodyParser.urlencoded({
         extended: false

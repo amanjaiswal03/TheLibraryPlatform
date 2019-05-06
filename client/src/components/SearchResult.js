@@ -24,10 +24,9 @@ class SearchResult extends Component{
       }
     displayResult(){
         console.log(this.props);
-        var libraryList = this.props.getLibrariesQuery;
         var bookList = this.props.getBooksQuery;
 
-        if(bookList.loading || libraryList.loading){
+        if(bookList.loading){
             return (<div> Loading results... </div>);
         }
         else {
@@ -65,15 +64,15 @@ class SearchResult extends Component{
     render(){
         return(
             <div id = "search-result">
-            <form onSubmit = {this.submitForm.bind(this)}>
-            <div className= "search-box">
-              <input id = "search-input" className="search-input" placeholder="Search for books near you.." onChange = {(e)=> {this.setState({temp: e.target.value})}} required />
-              <SearchIcon type = "submit" className = "search-icon"/>
-            </div>     
-            </form>
-            <div className="results">
-                {this.displayResult()}
-            </div>
+                <form onSubmit = {this.submitForm.bind(this)}>
+                    <div className= "search-box">
+                    <input id = "search-input" className="search-input" placeholder="Search for books near you.." onChange = {(e)=> {this.setState({temp: e.target.value})}} required />
+                    <SearchIcon type = "submit" className = "search-icon"/>
+                </div>     
+                </form>
+                <div className="results">
+                    {this.displayResult()}
+                </div>
             </div>
         )
     }
