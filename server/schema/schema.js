@@ -181,7 +181,7 @@ const Mutation = new GraphQLObjectType({
                     authorName: args.authorName,
                     librariesId: args.librariesId
                 });
-                return (Book.findOne({name: book.name, authorName: book.authorName}, function(err, doc){
+                return (Book.findOne({name: { $regex : new RegExp(book.name, "i") }, authorName: {$regex : new RegExp(book.authorName, "i")} }, function(err, doc){
                     console.log(doc);
                     if (err){
                         return err
@@ -190,7 +190,9 @@ const Mutation = new GraphQLObjectType({
                         return book.save();
                     }
                     else{
-                        doc.librariesId.push(book.librariesId[0]);
+                        if (!doc.librariesId.includes(book.librariesId[0])){
+                            doc.librariesId.push(book.librariesId[0]);
+                        }
                         return doc.save();
                     }
                 }))
