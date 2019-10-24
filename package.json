@@ -1,0 +1,26 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "server packages",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "bcrypt": "^3.0.6",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-graphql": "^0.9.0",
+    "is-empty": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "graphql": "^14.5.8",
+    "mongoose": "^5.7.4",
+    "validator": "^11.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/app.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+  },
+  "author": "Me",
+  "license": "ISC"
+}
