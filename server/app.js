@@ -3,6 +3,7 @@ const graphqlHTTP = require('express-graphql');
 const schema = require('./schema/schema');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 var bodyParser = require("body-parser");
 
 const app = express();
@@ -11,6 +12,9 @@ app.use(bodyParser.json())
 
 // allow cross origin requests
 app.use(cors());
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.use(
     bodyParser.urlencoded({
