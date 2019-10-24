@@ -22,7 +22,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "https://librarychamber.herokuapp.com",
+  "proxy": "https://radiant-chamber-25663.herokuapp.com",
   "browserslist": [
     ">0.2%",
     "not dead",
