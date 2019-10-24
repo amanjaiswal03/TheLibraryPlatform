@@ -22,6 +22,10 @@ app.use(
     })
 )
 
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+  });
+
 var Users = require('./routes/Users')
 
 app.use('/users', Users)
