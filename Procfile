@@ -1,3 +1,3 @@
 // Procfile
 
-web: node sapp.js
+web: node app.js
