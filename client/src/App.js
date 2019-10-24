@@ -22,7 +22,7 @@ import Dashboard from './components/Dashboard'
 
 //apollo client setup
 const client = new ApolloClient({
-  uri: 'http://localhost:8888/graphql'
+  uri: 'https://librarychamber.herokuapp.com/graphql'
 })
 
 

@@ -22,7 +22,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:8888",
+  "proxy": "https://librarychamber.herokuapp.com",
   "browserslist": [
     ">0.2%",
     "not dead",
