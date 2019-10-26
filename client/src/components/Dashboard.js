@@ -10,8 +10,8 @@ class Dashboard extends Component{
     removeLibrary(library){
         return(
         <div className = "action">
-            <Link to = {'/library/' + library.id} className = "link"><Button className = "info">More Info</Button></Link>
-            <Button className = "info" id = "removeLibBtn" onClick = {()=> {
+            <Link to = {'/library/' + library.id} className = "link2 more"><div className = "info">More Info</div></Link>
+            <div className = "info link2 remove" id = "removeLibBtn" onClick = {()=> {
                     this.props.removeLibraryMutation({variables:{id: library.id}});
                     this.props.removeBooksInLibraryMutation({
                         variables:{id: library.id},
@@ -19,7 +19,7 @@ class Dashboard extends Component{
                     );  
                     this.props.getLibraryByUserQuery.refetch();
                 }
-            }>Remove Library</Button>
+            }>Delete</div>
         </div>
         )
     }
@@ -28,15 +28,15 @@ class Dashboard extends Component{
         var data = this.props.getLibraryByUserQuery;
         console.log(data)
         if (!data.user){
-            return <div> No Library yet </div>
+            return <div className = "result"> No Library yet </div>
         }
         else if(data.loading){
-            return (<div> Loading libraries... </div>);
+            return (<div className = "result"> Loading libraries... </div>);
         } else{
             return data.user.library.map(library => {
                 return(
                         <div className = "result" key={library.id} >
-                            <Link to = {'/library/' + library.id} key={library.id} className = "link">
+                            <Link to = {'/library/' + library.id} key={library.id} className = "link2 library-box">
                                 <div className = "content">
                                     <div><strong>Library Name: </strong> {library.name}</div><br></br>
                                     <div><strong>Address:</strong> {library.address}</div><br></br>
@@ -56,8 +56,11 @@ class Dashboard extends Component{
             this.props.getLibraryByUserQuery.refetch();
         } 
         return (
-            <div>
-                <Link to = {'/addLibrary'} className = "link"><Button className = "alllib add"> Add a new library </Button></Link>
+            <div id = "all-libraries">
+                <div className = "lib-header">
+                    <div className ="lib-title">Your Libraries </div>
+                    <Link to = {'/addLibrary'} className = "link"><i class="fas fa-plus add-icon"></i></Link>
+                </div>
                 <ul className="libraries-list">
                     { this.displayLibraries() }
                 </ul>

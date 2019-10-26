@@ -3,6 +3,7 @@ import SearchIcon from '@material-ui/icons/Search';
 //material component
 import Button from '@material-ui/core/Button';
 import { Link, Redirect } from 'react-router-dom';
+import NavBar from './layout/navbar';
 
 
 
@@ -31,14 +32,14 @@ class Homepage extends Component {
   render(){
     return (
       <div className = "homepage">
-        <form onSubmit = {this.submitForm.bind(this)}>
-          {this.renderRedirect()}
-          <div className= "search-box">
-              <input className="search-input" placeholder="Search for books near you.." onChange = {(e)=> {this.setState({search: e.target.value})}} required />
-              <SearchIcon className = "search-icon"/>
-          </div>
-        </form>
-        <Button className = "alllib"> <Link to = "libraries" className = "link">All libraries Near you </Link></Button>
+        <div class = "search-section">
+          <form onSubmit = {this.submitForm.bind(this)}>
+            {this.renderRedirect()}
+            <div className= "search-box">
+                <input className="search-input" placeholder="Search for books near you...." onChange = {(e)=> {this.setState({search: e.target.value})}} required />
+            </div>
+          </form>
+        </div>
       </div>
     );
   }

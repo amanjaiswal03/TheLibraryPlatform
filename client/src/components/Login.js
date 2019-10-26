@@ -43,35 +43,31 @@ class Login extends Component {
     render() {
       if(localStorage.usertoken) {return <Redirect to = '/' />}
       return (
-        <div id = "login">
-        <div className = "create-title"> LOGIN </div>
-        <div className="red-text center">
-                <div>{this.state.errors && this.state.errors.email ? <p> {this.state.errors.email} </p> : null }</div>
-                <div>{this.state.errors && this.state.errors.password ? <p> {this.state.errors.password} </p> : null }</div>
-        </div>
-        <form noValidate id = "login-form" onSubmit={this.onSubmit}>
-          <div className = "field">
-            <label className = "liblabel" htmlFor="email">Email</label><br></br>
-            <input
-              className = "libfield"
-              onChange={this.onChange}
-              value={this.state.email}
-              id="email"
-              type="email"
-            />
+        <div id = "add-form">
+          <div className = "create-title"> Login </div>
+          <div className="form-error">
+                  <div>{this.state.errors && this.state.errors.email ? <p> {this.state.errors.email} </p> : null }</div>
+                  <div>{this.state.errors && this.state.errors.password ? <p> {this.state.errors.password} </p> : null }</div>
           </div>
-          <div className = "field">
-            <label className = "liblabel" htmlFor="password">Password</label>
-            <input
-              className = "libfield"
-              onChange={this.onChange}
-              value={this.state.password}
-              id="password"
-              type="password"
-            />
-          </div>
-          <Button className = "alllib" type = "submit">Login</Button>
-        </form>
+          <form noValidate id = "auth-form" onSubmit={this.onSubmit}>
+              <input
+                className = "create-form"
+                onChange={this.onChange}
+                value={this.state.email}
+                id="email"
+                type="email"
+                placeholder = "Email Address"
+              />
+              <input
+                className = "create-form"
+                onChange={this.onChange}
+                value={this.state.password}
+                id="password"
+                type="password"
+                placeholder = "Password"
+              />
+            <button className = "info" type = "submit">Login</button>
+          </form>
       </div>
         );
       }

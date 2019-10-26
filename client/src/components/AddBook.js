@@ -41,21 +41,12 @@ class AddBook extends Component {
     render(){
         return(
             <div id = "add-book">
-            <div className = "create-title"> ADD MORE BOOK </div>
+            <div className = "create-title add-book"> Add more book </div>
             <form id = "add-book-form" onSubmit = {this.submitForm.bind(this)}>
-                <div className="field">
-                    <label className = "liblabel">Book Name:</label>
-                    <input className = "libfield" type = "text" onChange = {(e)=> {this.setState({name: e.target.value})}} required></input>
-                </div>
-                <div className="field">
-                    <label  className = "liblabel" >Genre:</label><br></br>
-                    <input  className = "libfield" type = "text" onChange = {(e)=> {this.setState({genre: e.target.value})}} required></input>
-                </div>
-                <div className="field">
-                    <label className = "liblabel">Author Name:</label>
-                    <input  className = "libfield" type = "text" onChange = {(e)=> {this.setState({authorName: e.target.value})}} required></input>
-                </div>
-                <Button className = "alllib" type = "submit">Add Book</Button>
+                    <input className = "create-form" placeholder = "Name of the book" type = "text" onChange = {(e)=> {this.setState({name: e.target.value})}} required></input>
+                    <input  className = "create-form" placeholder = "Genre" type = "text" onChange = {(e)=> {this.setState({genre: e.target.value})}} required></input>
+                    <input  className = "create-form" placeholder = "Author Name" type = "text" onChange = {(e)=> {this.setState({authorName: e.target.value})}} required></input>
+                <button className = "info" type = "submit">Add Book</button>
             </form>
             </div>
         )

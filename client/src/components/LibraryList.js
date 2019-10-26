@@ -20,14 +20,14 @@ class LibraryList extends Component{
             return data.libraries.map(library => {
                 return(
                     <Link to = {'/library/' + library.id} key={library.id} className = "link">
-                        <div className = "result">
-                            <div className = "content">
+                        <div className = "result library-box">
+                            <div className = "content library-detail">
                                 <div><strong>Library Name: </strong> {library.name}</div><br></br>
                                 <div><strong>Address:</strong> {library.address}</div><br></br>
                                 <div><strong>Membership Fee:</strong> {library.membershipFee}$</div>
                             </div>
                             <div className = "action">
-                                <Button className = "info">More Info</Button>
+                                <div className = "info">More Info</div>
                             </div>
                         </div>
                     </Link>
@@ -38,7 +38,8 @@ class LibraryList extends Component{
     render(){
         console.log(this.props);
         return(
-            <div>
+            <div className = "alllibraries" id ="all-content">
+                All Libraries
                 <ul className="libraries-list">
                     { this.displayLibraries() }
                 </ul>

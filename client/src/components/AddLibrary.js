@@ -35,22 +35,13 @@ class AddLibrary extends Component {
     render(){
         if(!localStorage.usertoken) return <Redirect to = '/login' />
         return(
-            <div id = "add-library">
-                <div className = "create-title"> CREATE YOUR LIBRARY </div>
+            <div id = "add-form">
+                <div className = "create-title"> Create your library </div>
                 <form id = "add-library-form" onSubmit = {this.submitForm.bind(this)}>
-                    <div className="field">
-                        <label className = "liblabel">Name of the Library:</label>
-                        <input className = "libfield" type = "text" onChange = {(e)=> {this.setState({name: e.target.value})}} required></input>
-                    </div>
-                    <div className="field">
-                        <label className = "liblabel">Address:</label><br></br>
-                        <input className = "libfield" type = "text" onChange = {(e)=> {this.setState({address: e.target.value})} } required></input>
-                    </div>
-                    <div className="field">
-                        <label className = "liblabel">Membership Fee:</label>
-                        <input className= "libfield-mem" type = "Number" onChange = {(e)=> {this.setState({membershipFee: e.target.value})}} required></input><span id = "currency"> $</span>
-                    </div>
-                    <Button className = "alllib" type = "submit">Create library</Button>
+                        <input className = "create-form" type = "text" placeholder= "Name of the library" onChange = {(e)=> {this.setState({name: e.target.value})}} required></input>
+                        <input className = "create-form" type = "text" placeholder = "Address" onChange = {(e)=> {this.setState({address: e.target.value})} } required></input>
+                        <input className= "create-form" type = "Number" placeholder = "Membership fee in dollars" onChange = {(e)=> {this.setState({membershipFee: e.target.value})}} required></input>
+                    <button className = "info" type = "submit">Create library</button>
                 </form>
             </div>
         )

@@ -16,7 +16,7 @@ class LibraryDetails extends Component{
             if (this.props.getLibraryQuery.library.userId === jwt_decode(localStorage.usertoken)._id)
             {
                 return (
-                    <Button id = "info" href = "#add-book"> Add Book </Button>
+                    <button className = "info" id = "info" href = "#add-book"> Add Book </button>
                 )
             }
             else{
@@ -33,7 +33,7 @@ class LibraryDetails extends Component{
             if (this.props.getLibraryQuery.library.userId === jwt_decode(localStorage.usertoken)._id)
             {
                 return (
-                    <div className = "owner"><em> You are the owner of this library </em></div>
+                    <button className = "owner"><em> Owner </em></button>
                 )
             }
             else{
@@ -50,11 +50,11 @@ class LibraryDetails extends Component{
             if (this.props.getLibraryQuery.library.userId === jwt_decode(localStorage.usertoken)._id)
             {
                 return (
-                    <Button className = "info remove" onClick = {()=> {
+                    <button className = "info" onClick = {()=> {
                             this.props.removeBookMutation({variables:{id: book.id, librariesId: this.props.match.params.id}, refetchQueries: [{ query: getBooksQuery }]}); 
                             this.props.getLibraryQuery.refetch() 
                         }
-                    }> Remove </Button>
+                    }> Remove </button>
                 )
             }
             else{
@@ -86,29 +86,30 @@ class LibraryDetails extends Component{
         const {library} =  this.props.getLibraryQuery;
         if (library){
             return(
-                <div className = "lib-details">
+                <div className = "book-details">
                     <div className = "lib-info">
-                        <div><strong>Library Name: </strong> {library.name}</div><br></br>
-                        <div><strong>Address:</strong> {library.address}</div><br></br>
-                        <div><strong>Membership Fee:</strong> {library.membershipFee} $</div>
+                        <div className = "book-info">
+                            <div className = "book-title"> {library.name} {this.owner()}</div><br></br>
+                            <div><strong>Address:</strong> {library.address}</div><br></br>
+                            <div><strong>Membership Fee:</strong> {library.membershipFee} $</div>
+                        </div>
+                        {this.addBook()}
                     </div>
-                    <div className = "allbook-lib">
-                        <div><strong><em>All Books:</em> </strong>{this.addBookButton()}</div>
+                    <div className = "alllib-book">
+                        <div className = "available"><strong><em>All Books:</em> </strong></div>
                         {library.books.map(book => {
                             return(
-                                <div className = "book-lib" key = {book.id}>
+                                <div className = "lib-book" key = {book.id}>
                                     <Link to = {'/book/' + book.id} className = "link">
-                                        <div className = "book-detail-lib">
-                                            <div><strong> Book Name: </strong>{book.name}</div>
-                                            <div><strong>Author: </strong>{book.authorName}</div>
+                                        <div className = "lib-detail-book">
+                                            <div>{book.name}</div>
+                                            <div>by {book.authorName}</div>
                                         </div>
                                     </Link>
                                     <div className = "action-lib">
-                                        <Link to = {'/book/' + book.id} className = "link"><Button className = "info">More Info</Button></Link>
+                                        <Link to = {'/book/' + book.id} className = "link"><button className = "info lib-more">More Info</button></Link>
                                         {this.removeBook(book)}
                                     </div>
-                                    <hr></hr>
-                                    <br></br>
                                 </div>
                             )
                         })}
@@ -123,12 +124,9 @@ class LibraryDetails extends Component{
     render(){
         return(
             <div>
-                <div className="library-details">
-                    <div className = "headTitle"> LIBRARY DETAILS </div>
-                    {this.owner()}
+                <div className="book-details" id = "all-content">
                     {this.displayLibraryDetails()}
                 </div>
-                {this.addBook()}
             </div>
         )
     }

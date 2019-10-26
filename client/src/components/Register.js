@@ -47,56 +47,48 @@ class Register extends Component {
     render() {
         if(localStorage.usertoken) return <Redirect to = '/' />
     return (
-        <div id = "register">
-          <div className = "create-title"> REGISTER </div>
-          <div className="red-text center">
+        <div id = "add-form">
+          <div className = "create-title"> Register </div>
+          <div className="form-error">
             <div>{this.state.errors && this.state.errors.first_name ? <p> {this.state.errors.first_name} </p> : null }</div>
             <div>{this.state.errors && this.state.errors.last_name ? <p> {this.state.errors.last_name} </p> : null }</div>
             <div>{this.state.errors && this.state.errors.email ? <p> {this.state.errors.email} </p> : null }</div>
             <div>{this.state.errors && this.state.errors.password ? <p> {this.state.errors.password} </p> : null }</div>
           </div>
-          <form noValidate id = "register-form" onSubmit={this.onSubmit}>
-            <div className = "field">
-              <label className = "liblabel" htmlFor="first name"> First name</label>
+          <form noValidate id = "auth-form" onSubmit={this.onSubmit}>
               <input
-                className = "libfield"
+                className = "create-form"
                 onChange={this.onChange}
                 value={this.state.first_name}
-                id="first_name"
+                placeholder="First name"
+                id= "first_name"
                 type="text"
               />
-            </div> 
-            <div className = "field">
-              <label className = "liblabel" htmlFor="last name"> Last name</label>
               <input
-                className = "libfield"
+                className = "create-form"
                 onChange={this.onChange}
                 value={this.state.last_name}
-                id="last_name"
+                placeholder="Last name"
+                id = "last_name"
                 type="text"
               />
-            </div> 
-            <div className = "field">
-              <label className = "liblabel" htmlFor="email">Email</label><br></br>
               <input
-                className = "libfield"
+                className = "create-form"
                 onChange={this.onChange}
                 value={this.state.email}
-                id="email"
+                placeholder="Email Address"
+                id= "email"
                 type="email"
               />
-            </div>
-            <div className = "field">
-              <label className = "liblabel" htmlFor="password">Password</label>
               <input
-                className = "libfield"
+                className = "create-form"
                 onChange={this.onChange}
                 value={this.state.password}
-                id="password"
+                placeholder="Password"
+                id= "password"
                 type="password"
               />
-            </div>
-            <Button className = "alllib" type = "submit">Register</Button>
+            <button className = "info" type = "submit">Register</button>
           </form>
         </div>
         );

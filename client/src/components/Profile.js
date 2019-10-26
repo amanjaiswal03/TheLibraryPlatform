@@ -26,12 +26,12 @@ class Profile extends Component {
     render () {
         if(!localStorage.usertoken) {return <Redirect to = '/' />}
         return (
-            <div>
+            <div id = "all-content">
             <div className = "header-title"> Your Profile </div>
             <div className = "profilepage">
-                <div><strong>First Name:</strong> {this.state.first_name} </div><br></br>
-                <div><strong>Last Name:</strong> {this.state.last_name} </div><br></br>
-                <div><strong>Email: </strong>{this.state.email} </div><br></br>
+                <div className = "create-form"><strong>First Name:</strong> {this.state.first_name} </div><br></br>
+                <div className = "create-form"><strong>Last Name:</strong> {this.state.last_name} </div><br></br>
+                <div className = "create-form"><strong>Email: </strong>{this.state.email} </div><br></br>
             </div>
             </div>
         )

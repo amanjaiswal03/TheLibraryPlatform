@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 import { BrowserRouter, Route } from 'react-router-dom'
+import NavbarLinks from './components/layout/navbar';
 
 
 
 //components
 import LibraryList from './components/LibraryList';
 import AddLibrary from './components/AddLibrary';
-import NavbarLinks from './components/layout/navbar';
 import Homepage from './components/Homepage';
+import About from './components/About';
 import LibraryDetails from './components/LibraryDetails';
 import BookDetails from './components/BookDetails';
 import SearchResult from './components/SearchResult';
@@ -39,6 +40,7 @@ class App extends Component {
             <Route exact path = '/register' component = {Register} />
             <Route exact path = '/login' component = {Login} />
             <Route exact path = '/profile' component = {Profile} />
+            <Route exact path = '/about' component = {About} />
             <Route exact path = '/library/:id' component = {LibraryDetails} />
             <Route exact path = '/book/:id' component = {BookDetails} />
             <Route exact path = '/search/:query' component = {SearchResult} />
