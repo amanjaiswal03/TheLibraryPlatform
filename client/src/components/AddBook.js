@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { graphql, compose } from 'react-apollo';
 import { addBookMutation, addAuthorMutation, getBooksQuery} from '../queries/queries';
-import Button from '@material-ui/core/Button';
 
 
 
@@ -31,11 +30,12 @@ class AddBook extends Component {
                 librariesId:this.props.libraryId 
             },
             refetchQueries: [{ query: getBooksQuery }]
+        }).then(() => {
+            this.props.getLibraryQuery.refetch();
+            document.getElementById("add-book-form").reset();
+            document.documentElement.scrollTop = 0;
+            window.alert("book successfully added");
         });
-        this.props.getLibraryQuery.refetch();
-        document.getElementById("add-book-form").reset();
-        document.documentElement.scrollTop = 0;
-        window.alert("book successfully added");
 
     }
     render(){

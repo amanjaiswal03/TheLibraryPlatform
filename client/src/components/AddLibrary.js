@@ -26,10 +26,12 @@ class AddLibrary extends Component {
                 membershipFee: this.state.membershipFee,
                 userId: (jwt_decode(localStorage.usertoken))._id
             },
-            refetchQueries: [{ query: getLibrariesQuery, getLibraryByUserQuery}]
+            refetchQueries: [{ query: getLibrariesQuery}, {query: getLibraryByUserQuery, variables:{id: jwt_decode(localStorage.usertoken)._id}}]
+        }).then(()=> {
+            localStorage.setItem('newLibrary', "newLibrary")
+            this.props.history.push(`/dashboard`);
         });
-        localStorage.setItem('newLibrary', "newLibrary")
-        this.props.history.push(`/dashboard`);
+        
         
     }
     render(){

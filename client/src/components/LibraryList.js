@@ -4,7 +4,6 @@ import { graphql } from 'react-apollo';
 
 import { Link } from 'react-router-dom';
 
-import Button from '@material-ui/core/Button';
 
 
 class LibraryList extends Component{
