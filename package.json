@@ -15,7 +15,7 @@
     "jwa": "^1.4.1",
     "jws": "^3.2.2",
     "loader": "^2.1.1",
-    "mongoose": "^5.7.4",
+    "mongoose": "^5.7.5",
     "packages": "0.0.8",
     "validator": "^11.1.0"
   },
